@@ -1,0 +1,50 @@
+/* style.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+header {
+    background-color: #61a0a8;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.team-member img {
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+h2 {
+    color: #61a0a8;
+}
+
+p {
+    color: #888;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #61a0a8;
+    color: #fff;
+}
