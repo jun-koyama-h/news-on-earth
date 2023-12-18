@@ -13,7 +13,7 @@ jobs:
 
     - name: Install & Build
       run: |
-        cd path/to/your/directory
+        cd news-on-earth
         yarn install
         yarn start
 
