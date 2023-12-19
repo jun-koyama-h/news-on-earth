@@ -11,14 +11,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install & Build
+    - name: Install &  Build
       run: |
         cd news-on-earth
         yarn install
-        yarn start
+        yarn build
 
-    - name: Deploy to Cloudflare
-      uses: cloudflare/wrangler-action@1.3.0
+    - name: Publish to Cloudflare Pages
+      uses: cloudflare/pages-action@1
       with:
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        environment: 'production'
+        projectName: "teamproject"
+        directory: ./news-on-earth/build
