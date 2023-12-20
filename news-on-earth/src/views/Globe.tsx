@@ -12,14 +12,14 @@ function Globe() {
     // フレームごとの処理をここに記述
     if (meshRef.current) {
       // 例: 球を回転させる
-      meshRef.current.rotation.x += 0.01;
-      meshRef.current.rotation.y += 0.01;
+      meshRef.current.rotation.x += 0.001;
+      meshRef.current.rotation.y += 0.001;
     }
   });
 
   return (
     <mesh ref={meshRef} castShadow position={[0, 0, 0]}>
-      <sphereGeometry args={[50, 128, 64]} />
+      <sphereGeometry args={[30, 128, 64]} />
       <meshPhysicalMaterial map={earthMap} />
     </mesh>
   );
