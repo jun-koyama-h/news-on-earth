@@ -34,7 +34,7 @@
 // App.js
 
 // export default App;
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Globe from './views/Globe';
 const App = () => {
   return (
