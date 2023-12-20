@@ -1,0 +1,57 @@
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+// import './App.css'
+// 
+// function App() {
+//   const [count, setCount] = useState(0)
+
+//   return (
+//     <>
+//       <div>
+//         <a href="https://vitejs.dev" target="_blank">
+//           <img src={viteLogo} className="logo" alt="Vite logo" />
+//         </a>
+//         <a href="https://react.dev" target="_blank">
+//           <img src={reactLogo} className="logo react" alt="React logo" />
+//         </a>
+//       </div>
+//       <h1>Vite + React</h1>
+//       <div className="card">
+//         <button onClick={() => setCount((count) => count + 1)}>
+//           count is {count}
+//         </button>
+//         <p>
+//           Edit <code>src/App.tsx</code> and save to test HMR
+//         </p>
+//       </div>
+//       <p className="read-the-docs">
+//         Click on the Vite and React logos to learn more
+//       </p>
+//     </>
+//   )
+// }
+// App.js
+
+// export default App;
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import Globe from './views/Globe';
+import SearchPage from "./views/SearchPage"
+const App = () => {
+  return (
+    <Router>
+      <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Globe />
+      </div>
+      <div>
+      <Link to="/SearchPage">Enter</Link> {/* 次のページへのリンク */}
+      </div>
+      <Routes>
+          <Route path="/" element={<Globe />} />
+          <Route path="/next" element={<SearchPage />} />
+        </Routes>
+    </Router>
+  );
+};
+
+export default App
