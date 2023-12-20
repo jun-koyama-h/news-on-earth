@@ -36,7 +36,6 @@
 // export default App;
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import Globe from './views/Globe';
-import SearchPage from "./views/SearchPage"
 const App = () => {
   return (
     <Router>
@@ -44,11 +43,9 @@ const App = () => {
         <Globe />
       </div>
       <div>
-      <Link to="/SearchPage">Enter</Link> {/* 次のページへのリンク */}
       </div>
       <Routes>
           <Route path="/" element={<Globe />} />
-          <Route path="/next" element={<SearchPage />} />
         </Routes>
     </Router>
   );
