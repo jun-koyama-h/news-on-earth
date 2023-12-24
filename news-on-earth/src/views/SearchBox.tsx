@@ -8,9 +8,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = e.target.value;
-    setSearchTerm(newSearchTerm);
-    onSearchChange(newSearchTerm);
+    setSearchTerm(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    onSearchChange(searchTerm); // ボタンクリック時に検索処理を実行
   };
 
   return (
@@ -21,6 +23,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
         value={searchTerm}
         onChange={handleSearchChange}
       />
+      <button onClick={handleButtonClick}>検索</button> {/* 検索ボタンを追加 */}
     </div>
   );
 };
