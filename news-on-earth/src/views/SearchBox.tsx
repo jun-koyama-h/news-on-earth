@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import searchIcon from '../assets/search.svg';
 
 interface SearchBoxProps {
 	onSearchChange: (searchTerm: string) => void;
@@ -24,7 +25,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
 				onChange={handleSearchChange}
 			/>
 			<button onClick={handleButtonClick}>
-
+				<img src={searchIcon} alt="検索" width="20" height="20"/>
 			</button>
 		</div>
 	);
