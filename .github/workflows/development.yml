@@ -1,0 +1,26 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [ development ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install &  Build
+      run: |
+        cd news-on-earth
+        yarn install
+        yarn build
+
+    - name: Publish to Cloudflare Pages
+      uses: cloudflare/pages-action@1
+      with:
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_DEV }}
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
+        projectName: "teamproject"
+        directory: ./news-on-earth/dist
