@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SerchPage: React.FC = () => {
+const SearchPage: React.FC = () => {
   return (
     <div>
       <h1>ここに検索ページを書きます。</h1>
@@ -8,4 +8,4 @@ const SerchPage: React.FC = () => {
   );
 };
 
-export default SerchPage;
+export default SearchPage;
