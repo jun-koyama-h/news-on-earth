@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
-function SearchBox(props) {
-  const [searchTerm, setSearchTerm] = useState('');
+interface SearchBoxProps {
+  onSearchChange: (searchTerm: string) => void;
+}
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    if (props.onSearchChange) {
-      props.onSearchChange(e.target.value);
-    }
+const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+    onSearchChange(newSearchTerm);
   };
 
   return (
@@ -20,6 +23,6 @@ function SearchBox(props) {
       />
     </div>
   );
-}
+};
 
 export default SearchBox;
