@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBox from './SearchBox';
+import Logo from './Logo';
 
 const SearchPage: React.FC = () => {
   const handleSearch = (searchTerm: string) => {
@@ -11,7 +12,8 @@ const SearchPage: React.FC = () => {
     <div>
       <h1>ここに検索ページを書きます。</h1>
       <SearchBox onSearchChange={handleSearch} />
-    </div>
+      <Logo />
+    </div> 
   );
 };
 
