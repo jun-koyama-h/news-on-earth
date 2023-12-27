@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
+interface Post {
+    id: number;
+    title: string;
+}
+
 const Posts = () => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState<Post[]>([]);
 
     useEffect(() => {
         const getPosts = async () => {
