@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+interface PostData {
+    title: string;
+    text: string;
+    published_at: string;
+}
+
 const Post = () => {
-    const [post, setPost] = useState({});
+    const [post, setPost] = useState<PostData>({});
     const { id } = useParams();
 
     useEffect(() => {
