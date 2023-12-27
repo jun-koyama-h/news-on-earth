@@ -16,7 +16,6 @@ jobs:
         cd news-on-earth
         yarn install
         yarn build
-        cp -rf functions dist/
 
     - name: Publish to Cloudflare Pages
       uses: cloudflare/pages-action@1
@@ -25,3 +24,11 @@ jobs:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
         projectName: "news-on-earth"
         directory: ./news-on-earth/dist
+
+    - name: Publish to Cloudflare Functions
+      uses: cloudflare/pages-action@1
+      with:
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_DEV }}
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
+        projectName: "news-on-earth"
+        directory: ./news-on-earth/functions
