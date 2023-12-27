@@ -8,7 +8,7 @@ interface PostData {
 }
 
 const Post = () => {
-    const [post, setPost] = useState<PostData>({});
+    const [post, setPost] = useState<PostData>({ title: '', text: '', published_at: '' });
     const { id } = useParams();
 
     useEffect(() => {
