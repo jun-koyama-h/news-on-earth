@@ -15,3 +15,4 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_DEV }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
+          workingDirectory: "news-on-earth"
