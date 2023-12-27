@@ -17,10 +17,6 @@ jobs:
         yarn install
         yarn build
 
-    - name: Copy Fnctions
-      run: |
-        cp -rf news-on-earth/functions news-on-earth/dist/
-  
     - name: Publish to Cloudflare Pages
       uses: cloudflare/pages-action@1
       with:
