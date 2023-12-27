@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import searchIcon from '../assets/search.svg';
 
 interface SearchBoxProps {
@@ -7,6 +8,7 @@ interface SearchBoxProps {
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
+	const navigate = useNavigate();
 
 	const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value); //入力変更をリアルタイム検知
@@ -14,6 +16,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
 
 	const handleButtonClick = () => {
 		onSearchChange(searchTerm); // ボタンクリック時に検索処理を実行
+		navigate('/SearchResult'); // useHistoryの代わりにuseNavigateを使用
 	};
 
 	return (
