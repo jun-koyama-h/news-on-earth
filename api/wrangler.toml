@@ -1,5 +1,7 @@
 name = "api"
 compatibility_date = "2023-01-01"
+[build]
+main = "src/index.ts"
 
 # [vars]
 # MY_VARIABLE = "production_value"
