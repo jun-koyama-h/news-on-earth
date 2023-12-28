@@ -1,9 +1,5 @@
 name = "api"
 compatibility_date = "2023-01-01"
-[build]
-  command = "npm run build"  # ビルドコマンドを指定
-  upload = "dist/*"          # アップロードするファイルを指定
-  include = ["src/**/*"]     # アップロードする対象のファイルを指定
 
 # [vars]
 # MY_VARIABLE = "production_value"
