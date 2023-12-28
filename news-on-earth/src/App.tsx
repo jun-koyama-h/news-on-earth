@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Top from "./views/Top"
 import SearchPage from "./views/SearchPage"
 import SearchResult from "./views/SearchResult"
-import Posts from './components/posts';
-import Post from './components/post';
+import Test from './views/Test';
 
 function App() {
   return (
@@ -12,8 +11,7 @@ function App() {
         <Route path={`/`} element={<Top />} />
         <Route path={`/SearchPage`} element={<SearchPage />} />
         <Route path={`/SearchResult`} element={<SearchResult />} />
-        <Route path="/posts/list" element={<Posts />} />
-        <Route path="/posts/:id" element={<Post />} />
+        <Route path={`/Test`} element={<Test />} />
       </Routes>
     </BrowserRouter>
   );
