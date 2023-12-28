@@ -1,19 +1,36 @@
-name: Deploy Worker
+name: Deploy
+
 on:
   push:
     branches:
-      - development
+      - dev
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
 
-      - name: Build & Deploy Worker
-        uses: cloudflare/wrangler-action@v3
+    name: Deploy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_DEV }}
-          workingDirectory: "api"
+          node-version: 20
+
+      - name: Setup Yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Install Dependencies
+        run: yarn install
+        working-directory: api
+
+      - name: Deploy
+        run: yarn deploy
+        working-directory: api
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_DEV }}
