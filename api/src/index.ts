@@ -70,8 +70,8 @@ app.post('/api/news/', async (c) => {
             const responseData = await response.json();
             return c.text(JSON.stringify(responseData));
         } else {
-            console.log(response)
-            console.log(response.statusText);
+            const responseData = await response.json();
+            console.log(JSON.stringify(responseData));
             return c.text('エラー1:' + JSON.stringify(response), 500);
         }
     } catch (error) {
