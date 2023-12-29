@@ -72,11 +72,11 @@ app.post('/api/news/', async (c) => {
         } else {
             console.log(response)
             console.log(response.statusText);
-            return c.text('エラー', 500);
+            return c.text('エラー1', 500);
         }
     } catch (error) {
         console.log(error);
-        return c.text('エラー', 500);
+        return c.text('エラー2', 500);
     }
 });
 
