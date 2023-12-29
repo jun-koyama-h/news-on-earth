@@ -24,7 +24,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install Wrangler
-        run: yarn global add @cloudflare/wrangler
+        run: npm install -g wrangler
 
       - name: Set Environment Variable in Wrangler
         run: |
