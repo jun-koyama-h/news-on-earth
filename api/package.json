@@ -7,6 +7,7 @@
     "hono": "^3.11.11"
   },
   "devDependencies": {
+    "@cloudflare/ai": "^1.0.47",
     "@cloudflare/workers-types": "^4.20231218.0",
     "wrangler": "^3.22.1"
   }
