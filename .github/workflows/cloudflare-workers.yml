@@ -28,7 +28,7 @@ jobs:
 
       - name: Set Environment Variable in Wrangler
         run: |
-          echo "$NEWS_API_KEY" | wrangler secret put NEWS_API_KEY
+          echo "$NEWS_API_KEY" | wrangler secret put NEWS_API_KEY --name api
         env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
 
