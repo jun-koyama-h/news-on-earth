@@ -4,10 +4,12 @@ import { Ai } from '@cloudflare/ai';
 
 type Bindings = {
     AI: any;
+    NEWS_API_KEY: string;
 };
 
 export interface Env {
     AI: any;
+    NEWS_API_KEY: string;
 }
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -22,7 +24,7 @@ app.post('/api/translate/', async (c) => {
     try {
         const requestJson = await c.req.json();
         if (!requestJson) {
-            return c.text('必須パラメータが見つかりません: text', 400);
+            return c.text('必須パラメータが見つかりません', 400);
         }
 
         const ai = new Ai(c.env.AI);
@@ -38,6 +40,40 @@ app.post('/api/translate/', async (c) => {
         console.log(JSON.stringify(result));
 
         return c.text(JSON.stringify(result));
+    } catch (error) {
+        console.log(error);
+        return c.text('エラー', 500);
+    }
+});
+
+app.post('/api/news/', async (c) => {
+    try {
+        const requestJson = await c.req.json();
+        if (!requestJson) {
+            return c.text('必須パラメータが見つかりません', 400);
+        }
+
+        const apiUrl = 'https://newsapi.org/v2/everything';
+        const params = {
+            q: requestJson.q,
+            from: requestJson.from,
+            sortBy: 'popularity',
+            apiKey: c.env.NEWS_API_KEY,
+        };
+
+        const queryString = new URLSearchParams(params).toString();
+        const urlWithParams = `${apiUrl}?${queryString}`;
+
+        const response = await fetch(urlWithParams);
+
+        if (response.status === 200) {
+            const responseData = await response.json();
+            return c.text(JSON.stringify(responseData));
+        } else {
+            console.log(response)
+            console.log(response.statusText);
+            return c.text('エラー', 500);
+        }
     } catch (error) {
         console.log(error);
         return c.text('エラー', 500);
