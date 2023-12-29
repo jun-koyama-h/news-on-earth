@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "cross-env NEWS_API_KEY=${NEWS_API_KEY} wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
     "hono": "^3.11.11"
@@ -9,7 +9,6 @@
   "devDependencies": {
     "@cloudflare/ai": "^1.0.47",
     "@cloudflare/workers-types": "^4.20231218.0",
-    "cross-env": "^7.0.3",
     "wrangler": "^3.22.1"
   }
 }
