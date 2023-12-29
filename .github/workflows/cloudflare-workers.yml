@@ -34,4 +34,12 @@ jobs:
         working-directory: api
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN_DEV }}
+
+      - name: Deploy Environment
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_WORKERS_TOKEN_DEV }}
+          secrets: |
+            NEWS_API_KEY
+        env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
