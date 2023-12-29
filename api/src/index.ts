@@ -64,7 +64,12 @@ app.post('/api/news/', async (c) => {
         const queryString = new URLSearchParams(params).toString();
         const urlWithParams = `${apiUrl}?${queryString}`;
 
-        const response = await fetch(urlWithParams);
+        const response = await fetch(urlWithParams, {
+            headers: {
+                'User-Agent': 'news-on-earth',
+                'Content-Type': 'application/json'
+            },
+        });
 
         if (response.status === 200) {
             const responseData = await response.json();
