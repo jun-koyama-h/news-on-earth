@@ -3,6 +3,7 @@ import Top from "./views/Top"
 import SearchPage from "./views/SearchPage"
 import SearchResult from "./views/SearchResult"
 import Test from './views/Test';
+import Map from './views/Map';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path={`/SearchPage`} element={<SearchPage />} />
         <Route path={`/SearchResult`} element={<SearchResult />} />
         <Route path={`/Test`} element={<Test />} />
+        <Route path={`/Map`} element={<Map />} />
       </Routes>
     </BrowserRouter>
   );
