@@ -10,7 +10,6 @@ const SearchPage: React.FC = () => {
   
   return (
     <div>
-      <h1>ここに検索ページを書きます。</h1>
       <SearchBox onSearchChange={handleSearch} />
       <Logo />
     </div> 
