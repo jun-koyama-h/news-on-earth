@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBox from './SearchBox';
-import Logo from './Logo';
+import Background from './Background';
 
 const SearchPage: React.FC = () => {
   const handleSearch = (searchTerm: string) => {
@@ -11,7 +11,7 @@ const SearchPage: React.FC = () => {
   return (
     <div>
       <SearchBox onSearchChange={handleSearch} />
-      <Logo />
+      <Background />
     </div> 
   );
 };
