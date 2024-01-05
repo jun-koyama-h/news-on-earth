@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fffacd; 
+}
+
+.leftPanel {
+    width: calc(50% - 10px); /* 右パネルとの間隔を考慮して調整 */
+    margin-right: 20px; /* 右パネルとの間隔 */
+}
+
+.keyword {
+    margin-bottom: 20px;
+}
+
+.headlines {
+    list-style: none;
+    padding: 0;
+}
+
+.headlines li {
+    margin-bottom: 10px;
+}
+
+.rightPanel {
+    width: 50%;
+}
+
+/* MapContainer のスタイルをここに追加するか、または MapContainer.tsx 内で直接スタイルを適用します。 */
