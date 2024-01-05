@@ -57,6 +57,7 @@ app.post('/api/news/', async (c) => {
         const params = {
             q: requestJson.q,
             from: requestJson.from,
+            domains: requestJson.domains,
             sortBy: 'popularity',
             apiKey: c.env.NEWS_API_KEY,
         };
