@@ -3,8 +3,8 @@ import styles from './SearchResult.module.css';
 import Map from './Map'; // Map コンポーネントをインポート
 
 type SearchResultProps = {
-    keyword: string;
-    headlines: string[];
+  keyword?: string;
+  headlines?: string[];
 };
 
 const SearchResult: React.FC<SearchResultProps> = ({ keyword, headlines = [] }) => {
