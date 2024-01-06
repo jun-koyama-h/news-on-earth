@@ -2,12 +2,16 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #fffacd; 
+    background-color: #fffacd;
+    align-items: flex-start;
+    width: 100vw; /* ビューポートの幅全体 */
+    height: 100vh; /* ビューポートの高さ全体 */
 }
 
-.leftPanel {
-    width: calc(50% - 10px); /* 右パネルとの間隔を考慮して調整 */
-    margin-right: 20px; /* 右パネルとの間隔 */
+.leftPanel, .rightPanel {
+    flex: 1; /* コンテナの利用可能なスペースを均等に分ける */
+    height: 100vh; /* ビューポートの高さに合わせる */
+    overflow-y: auto; /* 必要に応じてスクロールバーを表示 */
 }
 
 .keyword {
@@ -23,8 +27,19 @@
     margin-bottom: 10px;
 }
 
-.rightPanel {
-    width: 50%;
+.headline {
+    cursor: pointer;
+    user-select: none; /* テキスト選択を防止 */
 }
-
-/* MapContainer のスタイルをここに追加するか、または MapContainer.tsx 内で直接スタイルを適用します。 */
+  
+.headline:hover {
+    color: #007bff; /* ホバー時の色 */
+}
+  
+.icon {
+    margin-left: 8px;
+}
+  
+.content {
+    transition: all 0.3s ease; /* コンテンツの表示/非表示時のアニメーション */
+}
