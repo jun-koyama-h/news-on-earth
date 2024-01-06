@@ -25,21 +25,23 @@ const SearchResult: React.FC<SearchResultProps> = ({ keyword, articles = [] }) =
         <div className={styles.keyword}>
           <h2>{keyword}</h2>
         </div>
-        <ul className={styles.articles}>
+        <div className={styles.articles}>
           {articles.map((article, index) => (
-            <li key={index} className={styles.article}>
-              <h3 onClick={() => toggleArticle(index)} className={styles.headline}>
-                {article.headline}
+            <div key={index} className={styles.article}>
+              <div onClick={() => toggleArticle(index)} className={styles.cardHeader}>
+                <h3 className={styles.headline}>{article.headline}</h3>
                 <span className={styles.icon}>
                   {openArticleIndex === index ? '▲' : '▼'}
                 </span>
-              </h3>
+              </div>
               {openArticleIndex === index && (
-                <p className={styles.content}>{article.content}</p>
+                <div className={styles.cardContent}>
+                  <p>{article.content}</p>
+                </div>
               )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       <div className={styles.rightPanel}>
         <Map />
