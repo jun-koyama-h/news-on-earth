@@ -10,6 +10,7 @@ interface TranslationResponse {
 interface Article {
   headline: string;
   content: string;
+  source: string;
 }
 
 const SearchPage: React.FC = () => {
@@ -21,10 +22,12 @@ const SearchPage: React.FC = () => {
       {
         headline: '固定記事の見出し1',
         content: '固定記事の内容1...',
+        source: 'BBC',
       },
       {
         headline: '固定記事の見出し2',
         content: '固定記事の内容2...',
+        source: 'WSJ',
       },
       // 他の固定記事
     ];
