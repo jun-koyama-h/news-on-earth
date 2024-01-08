@@ -8,17 +8,13 @@ type Article = {
   content: string;
 };
 
-type SearchResultProps = {
-  keyword?: string;
-  articles?: Article[];
-};
-
 const SearchResult: React.FC = () => {
-  const location = useLocation();
+  const location = useLocation<{ keyword?: string; articles?: Article[] }>();
   const [openArticleIndex, setOpenArticleIndex] = useState<number | null>(null);
 
-  const state = location.state as { keyword: string; articles: Article[] };
-  const { keyword, articles } = state;  
+  // state が存在しない場合に備えたデフォルト値を設定
+  const keyword = location.state?.keyword ?? 'デフォルトキーワード';
+  const articles = location.state?.articles ?? [];
 
   const toggleArticle = (index: number) => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
@@ -53,25 +49,6 @@ const SearchResult: React.FC = () => {
       </div>
     </div>
   );
-};
-
-// デフォルトPropsを定義
-SearchResult.defaultProps = {
-  keyword: 'ガザ',
-  articles: [
-    {
-      headline: 'ガザ決議案の採決、見出し1',
-      content: 'ガザ決議案の採決についての詳細な本文1。ガザ決議案の採決についての詳細な本文1。ガザ決議案の採決についての詳細な本文1。ガザ決議案の採決についての詳細な本文1。ガザ決議案の採決についての詳細な本文1。'
-    },
-    {
-      headline: 'ガザに関する国際会議、見出し2',
-      content: 'ガザに関する国際会議の詳細報告、本文2。ガザに関する国際会議の詳細報告、本文2。ガザに関する国際会議の詳細報告、本文2。ガザに関する国際会議の詳細報告、本文2。ガザに関する国際会議の詳細報告、本文2。'
-    },
-    {
-      headline: '地域の平和維持活動、見出し3',
-      content: '地域の平和維持活動に関する最新の動き、本文3。地域の平和維持活動に関する最新の動き、本文3。地域の平和維持活動に関する最新の動き、本文3。地域の平和維持活動に関する最新の動き、本文3。地域の平和維持活動に関する最新の動き、本文3。'
-    }
-  ]
 };
 
 export default SearchResult;
