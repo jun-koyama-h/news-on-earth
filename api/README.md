@@ -18,3 +18,4 @@ yarn dev
 ```
 yarn deploy
 ```
+* workspacesのテストです。ベータ版で個人は無料で使えます。
