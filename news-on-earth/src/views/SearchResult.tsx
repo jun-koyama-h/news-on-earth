@@ -6,6 +6,7 @@ import Map from './Map'; // Map コンポーネントをインポート
 type Article = {
   headline: string;
   content: string;
+  source: string;
 };
 
 const SearchResult: React.FC = () => {
@@ -32,13 +33,14 @@ const SearchResult: React.FC = () => {
             <div key={index} className={styles.article}>
               <div onClick={() => toggleArticle(index)} className={styles.cardHeader}>
                 <h3 className={styles.headline}>{article.headline}</h3>
+                <span className={styles.source}>{article.source}</span>
                 <span className={styles.icon}>
                   {openArticleIndex === index ? '▲' : '▼'}
                 </span>
               </div>
               {openArticleIndex === index && (
                 <div className={styles.cardContent}>
-                  <p>{article.content}</p>
+                  <p className={styles.content}>{article.content}</p>
                 </div>
               )}
             </div>
