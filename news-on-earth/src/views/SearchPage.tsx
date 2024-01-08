@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate をインポート
 import SearchBox from './SearchBox';
 import Background from './Background';

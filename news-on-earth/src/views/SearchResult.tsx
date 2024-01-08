@@ -9,12 +9,13 @@ type Article = {
 };
 
 const SearchResult: React.FC = () => {
-  const location = useLocation<{ keyword?: string; articles?: Article[] }>();
+  const location = useLocation();
   const [openArticleIndex, setOpenArticleIndex] = useState<number | null>(null);
 
-  // state が存在しない場合に備えたデフォルト値を設定
-  const keyword = location.state?.keyword ?? 'デフォルトキーワード';
-  const articles = location.state?.articles ?? [];
+  // location.state に基づいて型付けされた変数を作成
+  const state = location.state as { keyword?: string; articles?: Article[] } | null;
+  const keyword = state?.keyword ?? 'デフォルトキーワード';
+  const articles = state?.articles ?? [];
 
   const toggleArticle = (index: number) => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
