@@ -14,11 +14,8 @@ interface Article {
 
 const SearchPage: React.FC = () => {
   const navigate = useNavigate(); // useNavigate フックの初期化
-  const [keyword, setKeyword] = useState<string>('');
   const handleSearch = async (searchTerm: string) => {
-
     console.log('検索語:', searchTerm);
-    setKeyword(searchTerm); // keyword 更新
 
     const hardcodedArticles: Article[] = [
       {
