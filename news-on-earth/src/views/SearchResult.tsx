@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom'; // useLocation をインポート
 import styles from './SearchResult.module.css';
 import Map from './Map'; // Map コンポーネントをインポート
 
@@ -12,8 +13,12 @@ type SearchResultProps = {
   articles?: Article[];
 };
 
-const SearchResult: React.FC<SearchResultProps> = ({ keyword, articles = [] }) => {
+const SearchResult: React.FC = () => {
+  const location = useLocation();
   const [openArticleIndex, setOpenArticleIndex] = useState<number | null>(null);
+
+  const state = location.state as { keyword: string; articles: Article[] };
+  const { keyword, articles } = state;  
 
   const toggleArticle = (index: number) => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
