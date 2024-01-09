@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate をインポート
 import SearchBox from './SearchBox';
-import Background from './Background';
+import Logo from './Logo';
 
 interface TranslationResponse {
   translated_text: string;
@@ -61,8 +61,8 @@ const SearchPage: React.FC = () => {
 
   return (
     <div>
+      <Logo />
       <SearchBox onSearchChange={handleSearch} />
-      <Background />
     </div> 
   );
 };

@@ -4,7 +4,7 @@ const Background = () => {
   return (
     <div style={{
       backgroundImage: `url(${background})`,
-      backgroundSize: 'cover',
+      backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       minHeight: '100vh', // ビューポートの高さに合わせる
