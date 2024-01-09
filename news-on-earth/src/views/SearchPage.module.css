@@ -1,9 +1,10 @@
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    flex-direction: column;
     padding: 20px;
     background-color: #fcece4; /* 明るい背景色 */
-    align-items: flex-start;
     width: 100vw;
     height: 100vh;
 }
