@@ -86,4 +86,27 @@ app.post('/api/news/', async (c) => {
     }
 });
 
+app.post('/api/suggest/', async (c) => {
+    try {
+        const requestJson = await c.req.json();
+        if (!requestJson) {
+            return c.text('必須パラメータが見つかりません', 400);
+        }
+
+        const ai = new Ai(c.env.AI);
+
+        // JavaScriptで文字列結合
+        const promptKeyword = `「${requestJson.keyword}」の次の検索ワードを日本語のみで5個返してください。`;
+        const response = await ai.run('@cf/meta/llama-2-7b-chat-int8', {
+            prompt: promptKeyword
+          }
+        );
+        // パースしたJSONデータからkeywordプロパティを抽出
+        const responseData = JSON.parse(JSON.stringify(response));
+        return c.json(responseData);
+    } catch (error) {
+        console.error(error);
+        return c.text('エラー', 500);
+    }
+});
 export default app;
