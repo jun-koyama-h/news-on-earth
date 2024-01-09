@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fcece4; /* 明るい背景色 */
+    align-items: flex-start;
+    width: 100vw;
+    height: 100vh;
+}
