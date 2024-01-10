@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom'; // useLocation をインポート
-import styles from './SearchResult.module.css';
+import styles from '../styles/SearchResult.module.css';
 import Map from './Map'; // Map コンポーネントをインポート
 
 type Article = {

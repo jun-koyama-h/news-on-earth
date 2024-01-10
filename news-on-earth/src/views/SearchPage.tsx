@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate をインポート
-import SearchBox from './SearchBox';
-import styles from './SearchPage.module.css';
-import Logo from './Logo';
+import SearchBox from '../components/SearchBox';
+import styles from '../styles/SearchPage.module.css';
+import Logo from '../components/Logo';
 
 interface TranslationResponse {
   translated_text: string;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Globe from './Globe';
+import Globe from '../components/Globe';
 import React from 'react';
 
 const Top: React.FC = () => {
