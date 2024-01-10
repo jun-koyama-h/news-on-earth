@@ -7,9 +7,12 @@ binding = "AI"
 # [vars]
 # MY_VARIABLE = "production_value"
 
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "NEWS_ON_EARTH"
+id = "b3f81eb696a44abdb3db05396d9d9ef4"
+#kv_namespaces = [
+#    { binding = "NEWS_ON_EARTH", id = "b3f81eb696a44abdb3db05396d9d9ef4" }
+#]
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"
