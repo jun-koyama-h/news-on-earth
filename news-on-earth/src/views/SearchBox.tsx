@@ -21,7 +21,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ position: 'relative', width: '300px' }}>
             <input
                 type="text"
                 placeholder="日本語でキーワードを入力"
@@ -30,17 +30,43 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
                 style={{
                     fontSize: '20px',
                     padding: '10px',
-                    width: '300px',
+                    width: '100%',
+                    paddingRight: '40px', // Space for the icon and clear button
                 }}
             />
-            {searchTerm && (
-                <button onClick={handleClearButtonClick} style={{ marginLeft: '10px' }}>
+            <div
+                style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                <button
+                    onClick={handleClearButtonClick}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        marginRight: '5px',
+                        visibility: searchTerm ? 'visible' : 'hidden',
+                    }}
+                >
                     ×
                 </button>
-            )}
-            <button onClick={handleButtonClick} style={{ marginLeft: '10px' }}>
-                <img src={searchIcon} alt="検索" width="20" height="20" />
-            </button>
+                <button
+                    onClick={handleButtonClick}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                    }}
+                >
+                    <img src={searchIcon} alt="検索" width="20" height="20" />
+                </button>
+            </div>
         </div>
     );
 };
