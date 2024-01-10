@@ -8,3 +8,23 @@
     width: 100vw;
     height: 100vh;
 }
+
+.suggestionsList {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestionsList li {
+    padding: 10px;
+    cursor: pointer;
+}
+  
+.suggestionsList li:hover {
+    background-color: #f0f0f0;
+}

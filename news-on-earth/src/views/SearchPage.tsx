@@ -1,9 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate をインポート
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 
+interface SuggestApiResponse {
+  suggestions: string[];
+}
 interface TranslationResponse {
   translated_text: string;
 }
@@ -15,7 +18,38 @@ interface Article {
 }
 
 const SearchPage: React.FC = () => {
-  const navigate = useNavigate(); // useNavigate フックの初期化
+  const navigate = useNavigate();
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const handleSearchChange = async (searchTerm: string) => {
+    try {
+      const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ keyword: searchTerm }) // JSONキーを 'keyword' に変更
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const result: SuggestApiResponse = await response.json();
+
+      // result.suggestions を文字列に変換して出力
+      const suggestionsText = (result.suggestions !== undefined && result.suggestions !== null)
+        ? result.suggestions.toString()
+        : 'No suggestions';
+      console.log('生成AIの結果:', suggestionsText);
+
+      setSuggestions(Array.isArray(result.suggestions) ? result.suggestions : ['ダミー1','ダミー2']);
+    } catch (error) {
+      console.error('APIリクエストエラー:', error);
+      setSuggestions([]);
+    }
+  };
+  
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
 
@@ -63,7 +97,16 @@ const SearchPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <Logo />
-      <SearchBox onSearchChange={handleSearch} />
+      <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} />
+      {suggestions.length > 0 && (
+        <ul className={styles.suggestionsList}>
+          {suggestions.map((suggestion, index) => (
+            <li key={index} onClick={() => handleSearch(suggestion)}>
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      )}
     </div> 
   );
 };

@@ -3,14 +3,17 @@ import searchIcon from '../assets/search.svg';
 
 interface SearchBoxProps {
 	onSearchChange: (searchTerm: string) => void;
+	onInputChange: (searchTerm: string) => void;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
 	const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(e.target.value); //入力変更をリアルタイム検知
-	};
+		const newSearchTerm = e.target.value;
+		setSearchTerm(newSearchTerm); // 入力変更をリアルタイム検知
+		onInputChange(newSearchTerm); // 入力変更時に onInputChange 関数を呼び出す
+		};
 
 	const handleButtonClick = () => {
 		onSearchChange(searchTerm); // ボタンクリック時に検索処理を実行
