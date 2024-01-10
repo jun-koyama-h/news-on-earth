@@ -5,8 +5,9 @@ import styles from './SearchPage.module.css';
 import Logo from './Logo';
 
 interface SuggestApiResponse {
-  suggestions: string[];
+  response: string;
 }
+
 interface TranslationResponse {
   translated_text: string;
 }
@@ -28,7 +29,7 @@ const SearchPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ keyword: searchTerm }) // JSONキーを 'keyword' に変更
+        body: JSON.stringify({ keyword: searchTerm })
       });
   
       if (!response.ok) {
@@ -37,19 +38,23 @@ const SearchPage: React.FC = () => {
   
       const result: SuggestApiResponse = await response.json();
 
-      // result.suggestions を文字列に変換して出力
-      const suggestionsText = (result.suggestions !== undefined && result.suggestions !== null)
-        ? result.suggestions.toString()
-        : 'No suggestions';
+      // 正規表現を使用して必要なテキストを抽出
+      const regex = /\n(\d\.\s[^-]+)\s-\s/g;
+      const suggestionsText = [];
+      let match;
+      while ((match = regex.exec(result.response)) !== null) {
+        suggestionsText.push(match[1]);
+      }
+  
       console.log('生成AIの結果:', suggestionsText);
-
-      setSuggestions(Array.isArray(result.suggestions) ? result.suggestions : ['ダミー1','ダミー2']);
+      setSuggestions(suggestionsText);
+  
     } catch (error) {
       console.error('APIリクエストエラー:', error);
       setSuggestions([]);
     }
   };
-  
+
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
 
