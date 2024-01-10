@@ -39,7 +39,8 @@ const SearchPage: React.FC = () => {
       const result: SuggestApiResponse = await response.json();
 
       // 正規表現を使用して必要なテキストを抽出
-      const regex = /\n(\d\.\s[^-]+)\s-\s/g;
+      const regex = /\n\d\.\s([^\s]+)\s\(/g;
+
       const suggestionsText = [];
       let match;
       while ((match = regex.exec(result.response)) !== null) {
