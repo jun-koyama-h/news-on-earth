@@ -1,15 +1,18 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { Ai } from '@cloudflare/ai';
+import { KVNamespace } from '@cloudflare/workers-types';
 
 type Bindings = {
     AI: any;
     NEWS_API_KEY: string;
+    NEWS_ON_EARTH: KVNamespace;
 };
 
 export interface Env {
     AI: any;
     NEWS_API_KEY: string;
+    NEWS_ON_EARTH: KVNamespace;
 }
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -107,6 +110,40 @@ app.post('/api/suggest/', async (c) => {
     } catch (error) {
         console.error(error);
         return c.text('エラー', 500);
+    }
+});
+
+app.get('/api/kv/', async (c) => {
+    try {
+        // 非同期でキーの一覧を取得
+        // const keyList = await c.env.NEWS_ON_EARTH.list();
+        // console.log(keyList);
+        c.env.NEWS_ON_EARTH.put("aaa", "bbb");
+        const value = await c.env.NEWS_ON_EARTH.get("test");
+        console.log("value:" + value);
+        // if (!keyList || keyList.keys.length === 0) {
+        //     console.log("Not Found.");
+        //     return new Response(JSON.stringify([]), {
+        //         headers: { 'Content-Type': 'application/json' },
+        //     });
+        // }
+
+        // // 各キーに対する値を非同期で取得
+        // const result = await Promise.all(
+        //     keyList.keys.map(async (item) => ({
+        //         key: item.name,
+        //         value: await c.env.NEWS_ON_EARTH.get(item.name, 'text'),
+        //     }))
+        // );
+
+        console.log("111111111111");
+
+        return new Response(JSON.stringify([]), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    } catch (error) {
+        console.error(error);
+        return new Response('エラー', { status: 500 });
     }
 });
 export default app;
