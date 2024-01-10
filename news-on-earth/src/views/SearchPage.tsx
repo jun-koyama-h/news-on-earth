@@ -22,6 +22,7 @@ const SearchPage: React.FC = () => {
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [debounceTimer, setDebounceTimer] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>(''); // 検索ボックスの値を保持するステート
 
   const handleSearchChange = async (searchTerm: string) => {
     // 既存のタイマーをクリア
@@ -112,14 +113,20 @@ const SearchPage: React.FC = () => {
     });
   };
 
+  // サジェストリストの項目がクリックされたときに呼び出される関数
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchTerm(suggestion); // 検索ボックスの値を更新
+    handleSearch(suggestion); // 検索処理を実行
+  };
+  
   return (
     <div className={styles.container}>
       <Logo />
-      <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} />
+      <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} searchTerm={searchTerm} />
       {suggestions.length > 0 && (
         <ul className={styles.suggestionsList}>
           {suggestions.map((suggestion, index) => (
-            <li key={index} onClick={() => handleSearch(suggestion)}>
+            <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion}
             </li>
           ))}
