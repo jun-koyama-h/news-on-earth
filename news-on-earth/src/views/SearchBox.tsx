@@ -11,7 +11,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, se
 	const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
 
 	useEffect(() => {
-	  setLocalSearchTerm(searchTerm); // 外部から searchTerm が変更されたときに内部状態を更新
+    setLocalSearchTerm(searchTerm); // 外部から searchTerm が変更されたときに内部状態を更新
 	}, [searchTerm]);
   
 
