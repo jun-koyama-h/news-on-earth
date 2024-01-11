@@ -56,10 +56,15 @@ app.post('/api/news/', async (c) => {
             return c.text('必須パラメータが見つかりません', 400);
         }
 
+        // 現在の日付から7日前の日付を取得
+        const date = new Date();
+        date.setDate(date.getDate() - 7);
+        const fromDate = date.toISOString().split('T')[0];
+
         const apiUrl = 'https://newsapi.org/v2/everything';
         const params = {
             q: requestJson.q,
-            from: requestJson.from,
+            from: fromDate,
             domains: requestJson.domains,
             sortBy: 'popularity',
             apiKey: c.env.NEWS_API_KEY,
