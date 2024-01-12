@@ -8,7 +8,7 @@ interface SearchBoxProps {
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, searchTerm }) => {
-	const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
+    const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
 
 	useEffect(() => {
     setLocalSearchTerm(searchTerm); // 外部から searchTerm が変更されたときに内部状態を更新
@@ -26,24 +26,55 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, se
 		onSearchChange(localSearchTerm); // ボタンクリック時に検索処理を実行
 	};
 
-	return (
-		<div>
-			<input
-				type="text"
-				placeholder="日本語でキーワードを入力"
-				value={localSearchTerm}
-				onChange={handleSearchChange}
+    return (
+        <div style={{ position: 'relative', width: '300px' }}>
+            <input
+                type="text"
+                placeholder="日本語でキーワードを入力"
+                value={localSearchTerm}
+                onChange={handleSearchChange}
                 style={{
-                    fontSize: '20px', // フォントサイズを大きくする
-                    padding: '10px', // テキストボックス内のパディングを増やす
-                    width: '300px', // テキストボックスの幅を指定する
+                    fontSize: '20px',
+                    padding: '10px',
+                    width: '100%',
+                    paddingRight: '40px', // Space for the icon and clear button
                 }}
-			/>
-			<button onClick={handleButtonClick}>
-				<img src={searchIcon} alt="検索" width="20" height="20"/>
-			</button>
-		</div>
-	);
+            />
+            <div
+                style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                <button
+                    onClick={handleClearButtonClick}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        marginRight: '5px',
+                        visibility: searchTerm ? 'visible' : 'hidden',
+                    }}
+                >
+                    ×
+                </button>
+                <button
+                    onClick={handleButtonClick}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                    }}
+                >
+                    <img src={searchIcon} alt="検索" width="20" height="20" />
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default SearchBox;
