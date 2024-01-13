@@ -1,12 +1,16 @@
 import React from 'react';
-import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer as LeafletMap, TileLayer } from 'react-leaflet';
+import LocationMarker from './LocationMarker'; // LocationMarker のインポート
 
 interface MapContainerProps {
   center: { lat: number; lng: number };
   zoom: number;
+  position?: { lat: number; lng: number }; // 新しいprops
 }
 
-const MapContainer: React.FC<MapContainerProps> = ({ center, zoom }) => {
+const MapContainer: React.FC<MapContainerProps> = ({ center, zoom, position }) => {
+  console.log('mapcontainer center->', center)
+  console.log('mapcontainer position->', position)
   const MapContainerStyle = {
     width: "800px",
     height: "800px"
@@ -18,9 +22,8 @@ const MapContainer: React.FC<MapContainerProps> = ({ center, zoom }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={center}>
-        <Popup>Location</Popup>
-      </Marker>
+      {position && <LocationMarker position={position} />}
+
     </LeafletMap>
   );
 };

@@ -28,6 +28,7 @@ type KVApiResponse = KVApiResponseItem[];
 const SearchResult: React.FC = () => {
   const location = useLocation();
   const [openArticleIndex, setOpenArticleIndex] = useState<number | null>(null);
+  const [mapLocation, setMapLocation] = useState<{ lat: number; lng: number }>({ lat: 35.6894, lng: 139.6917 });
 
   // location.state に基づいて型付けされた変数を作成
   const state = location.state as { keyword?: string; articles?: Article[] } | null;
@@ -66,6 +67,12 @@ const SearchResult: React.FC = () => {
           // value の JSON 文字列を適切に解析する
           const locationInfo: Location = JSON.parse(matchingItem.value.replace(/\\/g, ""));
           console.log(`位置情報 (${source}):`, locationInfo);
+          setMapLocation({
+            lat: parseFloat(locationInfo.latitude),
+            lng: parseFloat(locationInfo.longitude)
+          });
+          console.log('SearchResult->', mapLocation)
+
         } catch (parseError) {
           console.error(`JSON解析エラー (${source}):`, matchingItem.value);
         }
@@ -73,7 +80,6 @@ const SearchResult: React.FC = () => {
         console.log(`位置情報が見つかりませんでした (${source})`);
       }
       
-
         
       } catch (error) {
         console.error('APIリクエストエラー:', error);
@@ -111,7 +117,7 @@ const SearchResult: React.FC = () => {
         </div>
       </div>
       <div className={styles.rightPanel}>
-        <Map />
+      <Map location={mapLocation} />
       </div>
     </div>
   );
