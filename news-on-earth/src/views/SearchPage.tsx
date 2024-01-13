@@ -100,7 +100,7 @@ const SearchPage: React.FC = () => {
       {
         headline: '固定記事の見出し1',
         content: '固定記事の内容1...',
-        source: 'BBC',
+        source: 'bbc(ex)',
       },
       {
         headline: '固定記事の見出し2',
