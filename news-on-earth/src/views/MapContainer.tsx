@@ -9,7 +9,8 @@ interface MapContainerProps {
 }
 
 const MapContainer: React.FC<MapContainerProps> = ({ center, zoom, position }) => {
-  console.log('mapcontainer->', center)
+  console.log('mapcontainer center->', center)
+  console.log('mapcontainer position->', position)
   const MapContainerStyle = {
     width: "800px",
     height: "800px"
@@ -21,24 +22,10 @@ const MapContainer: React.FC<MapContainerProps> = ({ center, zoom, position }) =
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {position && <LocationMarker position={position} />} // 位置情報があれば LocationMarker を表示
+      {position && <LocationMarker position={position} />}
+
     </LeafletMap>
   );
 };
-
-// MapContainer.tsx
-// interface LocationMarkerProps {
-//   position: { lat: number; lng: number } | null;
-// }
-
-// const LocationMarker: React.FC<LocationMarkerProps> = ({ position }) => {
-//   if (position === null) return null;
-
-//   return (
-//     <Marker position={position}>
-//       <Popup>指定された位置</Popup>
-//     </Marker>
-//   );
-// };
 
 export default MapContainer;

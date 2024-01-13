@@ -1,17 +1,22 @@
-import React from 'react';
-import { Marker, Popup } from 'react-leaflet';
-import { LatLngLiteral } from 'leaflet';
+import React, { useEffect } from 'react';
+import { Marker, Popup, useMap } from 'react-leaflet';
 
 interface LocationMarkerProps {
-  position: LatLngLiteral | null;
+  position: { lat: number; lng: number };
 }
 
 const LocationMarker: React.FC<LocationMarkerProps> = ({ position }) => {
-  return position ? (
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo(position);
+  }, [position, map]);
+
+  return (
     <Marker position={position}>
-      <Popup>You are here</Popup>
+      <Popup>指定された位置</Popup>
     </Marker>
-  ) : null;
+  );
 };
 
 export default LocationMarker;

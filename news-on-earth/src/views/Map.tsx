@@ -14,7 +14,7 @@ const Map: React.FC<MapProps> = ({ location }) => {
   
   return (
     <div>
-        <MapContainer center={center} zoom={13} />
+      <MapContainer center={center} zoom={13} position={location} />
     </div> 
   );
 };
