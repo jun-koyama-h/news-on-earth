@@ -13,7 +13,7 @@ function App() {
         <Route path={`/SearchPage`} element={<SearchPage />} />
         <Route path={`/SearchResult`} element={<SearchResult />} />
         <Route path={`/Test`} element={<Test />} />
-        <Route path={`/Map`} element={<Map />} />
+        <Route path={`/Map`} element={<Map location={{ lat: 51.505, lng: -0.09 }} />} />
       </Routes>
     </BrowserRouter>
   );

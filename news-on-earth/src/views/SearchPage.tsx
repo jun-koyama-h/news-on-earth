@@ -105,7 +105,7 @@ const SearchPage: React.FC = () => {
       {
         headline: '固定記事の見出し2',
         content: '固定記事の内容2...',
-        source: 'WSJ',
+        source: 'cnn(ex)',
       },
     ];
     //TODO:仮表示のため、削除
