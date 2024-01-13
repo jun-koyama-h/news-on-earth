@@ -1,28 +1,5 @@
-import React, { useState } from 'react';
-import { MapContainer as LeafletMap, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import { LatLngLiteral } from 'leaflet';
-
-interface LocationMarkerProps {}
-
-const LocationMarker: React.FC<LocationMarkerProps> = () => {
-
-  const [position, setPosition] = useState<LatLngLiteral | null>(null);
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    },
-  });
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
-  );
-};
+import React from 'react';
+import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 
 interface MapContainerProps {
   center: { lat: number; lng: number };
@@ -41,7 +18,9 @@ const MapContainer: React.FC<MapContainerProps> = ({ center, zoom }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarker />
+      <Marker position={center}>
+        <Popup>Location</Popup>
+      </Marker>
     </LeafletMap>
   );
 };
