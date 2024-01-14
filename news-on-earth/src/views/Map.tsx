@@ -7,15 +7,13 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ location }) => {
-  console.log('map->', location)
   const defaultCenter = { lat: 51.505, lng: -0.09 }; // デフォルトの中心座標
   const center = location || defaultCenter;
 
-  
   return (
     <div>
-      <MapContainer center={center} zoom={13} position={location} />
-    </div> 
+      <MapContainer center={center} zoom={5} position={location} />
+    </div>
   );
 };
 

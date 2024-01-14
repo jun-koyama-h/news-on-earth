@@ -9,8 +9,6 @@ interface MapContainerProps {
 }
 
 const MapContainer: React.FC<MapContainerProps> = ({ center, zoom, position }) => {
-  console.log('mapcontainer center->', center)
-  console.log('mapcontainer position->', position)
   const MapContainerStyle = {
     width: "800px",
     height: "800px"
@@ -23,7 +21,6 @@ const MapContainer: React.FC<MapContainerProps> = ({ center, zoom, position }) =
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {position && <LocationMarker position={position} />}
-
     </LeafletMap>
   );
 };

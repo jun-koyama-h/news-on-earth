@@ -39,53 +39,45 @@ const SearchResult: React.FC = () => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
   };
 
-    // sourceをクリックしたときに呼び出される関数
-    const handleSourceClick = async (source: string) => {
-      console.log('KVAPI:', source);
+  // sourceをクリックしたときに呼び出される関数
+  const handleSourceClick = async (source: string) => {
+    try {
+      // KVからメディアの地図情報を取得
+      const kvResponse = await fetch('https://api.news-on-earth.workers.dev/api/kv/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-      try {
-        // KVからメディアの地図情報を取得
-        const kvResponse = await fetch('https://api.news-on-earth.workers.dev/api/kv/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-      
-        if (!kvResponse.ok) {
-          throw new Error(`HTTP error! status: ${kvResponse.status}`);
-        }
-      
-        const kvResult: KVApiResponse = await kvResponse.json();
-      // 位置情報の処理など
-      console.log('KV APIの応答:', kvResult);
-      
+      if (!kvResponse.ok) {
+        throw new Error(`HTTP error! status: ${kvResponse.status}`);
+      }
+
+      const kvResult: KVApiResponse = await kvResponse.json();
+
       // sourceと一致するアイテムを見つける
       const matchingItem = kvResult.find(item => item.key === source);
       if (matchingItem) {
         try {
           // value の JSON 文字列を適切に解析する
           const locationInfo: Location = JSON.parse(matchingItem.value.replace(/\\/g, ""));
-          console.log(`位置情報 (${source}):`, locationInfo);
           setMapLocation({
             lat: parseFloat(locationInfo.latitude),
             lng: parseFloat(locationInfo.longitude)
           });
-          console.log('SearchResult->', mapLocation)
-
         } catch (parseError) {
           console.error(`JSON解析エラー (${source}):`, matchingItem.value);
         }
       } else {
         console.log(`位置情報が見つかりませんでした (${source})`);
       }
-      
-        
-      } catch (error) {
-        console.error('APIリクエストエラー:', error);
-      }
-    };
-  
+
+    } catch (error) {
+      console.error('APIリクエストエラー:', error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.leftPanel}>
@@ -97,7 +89,7 @@ const SearchResult: React.FC = () => {
             <div key={index} className={styles.article}>
               <div onClick={() => toggleArticle(index)} className={styles.cardHeader}>
                 <h3 className={styles.headline}>{article.headline}</h3>
-                <span 
+                <span
                   className={styles.source}
                   onClick={() => handleSourceClick(article.source)}
                 >
@@ -117,7 +109,7 @@ const SearchResult: React.FC = () => {
         </div>
       </div>
       <div className={styles.rightPanel}>
-      <Map location={mapLocation} />
+        <Map location={mapLocation} />
       </div>
     </div>
   );
