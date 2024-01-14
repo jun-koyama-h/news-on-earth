@@ -1,6 +1,6 @@
 import React from 'react';
 import MapContainer from './MapContainer'
-import '../../node_modules/leaflet/dist/leaflet.css'
+import 'leaflet/dist/leaflet.css';
 
 interface MapProps {
   location: { lat: number; lng: number };
