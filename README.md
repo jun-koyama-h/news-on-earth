@@ -19,3 +19,29 @@
 * データベース：Cloudflare Workers KV
 * 翻訳API：Cloudflare Wokers AI
 * タスク管理：GitHub Projects
+
+## 使用するメディア
+* 日本:[NHK](https://www.nhk.or.jp/)
+35.71868658456217, 139.69505037724264
+* インド:[The Times of India](https://timesofindia.indiatimes.com/)
+28.567418741916896, 77.31810815767146
+* イスラエル:[ynet ידיעות אחרונות](https://www.ynet.co.il/home/0,7340,L-8,00.html)
+31.99320693688765, 34.75979254417867
+* ロシア：[Хибины.ru](https://www.interfax.ru/)
+58.210903398285495, 38.123876993151804
+* ウクライナ：[TCH](https://tsn.ua/)
+50.468862234391096, 30.504750457671477
+* イギリス：[BBC](https://www.bbc.com/)
+51.51908534419871, -0.1439736153429729
+* アメリカ：[CNN](https://edition.cnn.com/)
+40.588103341848054, -77.53671137416158
+* ドイツ：[SPIEGEL ONLINE](https://www.spiegel.de/politik/)
+53.54589604431986, 10.003963651648041
+* 中国：[中国新聞網](https://www.chinanews.com/)
+39.925379280329466, 116.33750974281708
+* エジプト：[Al Youm Al Sabea](https://www.youm7.com/home/index)
+30.049263425756553, 31.210451457352463
+* キューバ：[Trabajadores](https://www.trabajadores.cu/)
+23.121388185987506, -82.38382042158497
+* トルコ：[Sözcü](https://www.sozcu.com.tr/)
+41.5304375907573, 29.065487235442973
