@@ -166,7 +166,7 @@ const SearchPage: React.FC = () => {
       const newsResult: NewsApiResponse = await newsResponse.json();
       console.log('取得記事:', newsResult.articles);
 
-      const articles: Article[] = newsResult.articles.map(article => ({
+      const articles: Article[] = newsResult.articles.slice(0, 3).map(article => ({
         headline: article.title,
         content: article.content,
         source: article.source.name
