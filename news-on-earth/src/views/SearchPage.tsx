@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 
+//型定義
 interface SuggestApiResponse {
   response: string;
 }
@@ -32,6 +33,7 @@ interface Article {
   content: string;
   source: string;
 }
+//型定義ここまで
 
 const SearchPage: React.FC = () => {
   const navigate = useNavigate();
@@ -120,21 +122,6 @@ const SearchPage: React.FC = () => {
   //翻訳・NewsAPI
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
-
-    //TODO:仮表示のため、削除
-    // const hardcodedArticles: Article[] = [
-    //   {
-    //     headline: '固定記事の見出し1',
-    //     content: '固定記事の内容1...',
-    //     source: 'bbc(ex)',
-    //   },
-    //   {
-    //     headline: '固定記事の見出し2',
-    //     content: '固定記事の内容2...',
-    //     source: 'cnn(ex)',
-    //   },
-    // ];
-    //TODO:仮表示のため、削除
     
     try {
       //翻訳API：キーワードの日→英翻訳
