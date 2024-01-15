@@ -148,7 +148,7 @@ const SearchPage: React.FC = () => {
       const translateResult: TranslationResponse = await translateResponse.json();
       console.log('翻訳結果:', translateResult.translated_text);
       
-      //NewsAPI
+      //NewsAPI：記事の取得
       const newsResponse = await fetch('https://api.news-on-earth.workers.dev/api/news/', {
         method: 'POST',
         headers: {
