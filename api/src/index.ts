@@ -65,7 +65,7 @@ app.post('/api/news/', async (c) => {
         const params = {
             q: requestJson.q,
             from: fromDate,
-            domains: 'bbc.co.uk',
+            domains: 'bbc.co.uk,cnn.com',
             sortBy: 'popularity',
             apiKey: c.env.NEWS_API_KEY,
         };
