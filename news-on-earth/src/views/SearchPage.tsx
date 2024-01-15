@@ -117,6 +117,7 @@ const SearchPage: React.FC = () => {
     };
   }
 
+  //翻訳後の記事を格納する変数を定義
   let translatedArticles: Article[] = [];
 
   //翻訳・NewsAPI
