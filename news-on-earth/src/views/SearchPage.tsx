@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 
+//型定義
 interface SuggestApiResponse {
   response: string;
 }
@@ -32,6 +33,7 @@ interface Article {
   content: string;
   source: string;
 }
+//型定義ここまで
 
 const SearchPage: React.FC = () => {
   const navigate = useNavigate();
@@ -98,7 +100,7 @@ const SearchPage: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ translateText: article.content })
+      body: JSON.stringify({ translateText: article.headline + " " + article.content })
     });
 
     if (!response.ok) {
@@ -106,32 +108,21 @@ const SearchPage: React.FC = () => {
     }
 
     const result: TranslationResponse = await response.json();
+    const [translatedHeadline, ...translatedContent] = result.translated_text.split(" ");
+
     return {
-      ...article,
-      content: result.translated_text
+      headline: translatedHeadline,
+      content: translatedContent.join(" "),
+      source: article.source
     };
   }
 
+  //翻訳後の記事を格納する変数を定義
   let translatedArticles: Article[] = [];
 
   //翻訳・NewsAPI
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
-
-    //TODO:仮表示のため、削除
-    // const hardcodedArticles: Article[] = [
-    //   {
-    //     headline: '固定記事の見出し1',
-    //     content: '固定記事の内容1...',
-    //     source: 'bbc(ex)',
-    //   },
-    //   {
-    //     headline: '固定記事の見出し2',
-    //     content: '固定記事の内容2...',
-    //     source: 'cnn(ex)',
-    //   },
-    // ];
-    //TODO:仮表示のため、削除
     
     try {
       //翻訳API：キーワードの日→英翻訳
@@ -175,6 +166,7 @@ const SearchPage: React.FC = () => {
 
       //翻訳API：記事の英→日翻訳
       translatedArticles = await Promise.all(articles.map(translateArticle));
+      console.log('翻訳記事', translatedArticles)
   
     } catch (error) {
       console.error('APIリクエストエラー:', error);
