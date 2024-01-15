@@ -98,7 +98,7 @@ const SearchPage: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ translateText: article.content })
+      body: JSON.stringify({ translateText: article.headline + " " + article.content })
     });
 
     if (!response.ok) {
@@ -106,9 +106,12 @@ const SearchPage: React.FC = () => {
     }
 
     const result: TranslationResponse = await response.json();
+    const [translatedHeadline, ...translatedContent] = result.translated_text.split(" ");
+
     return {
-      ...article,
-      content: result.translated_text
+      headline: translatedHeadline,
+      content: translatedContent.join(" "),
+      source: article.source
     };
   }
 
@@ -175,6 +178,7 @@ const SearchPage: React.FC = () => {
 
       //翻訳API：記事の英→日翻訳
       translatedArticles = await Promise.all(articles.map(translateArticle));
+      console.log('翻訳記事', translatedArticles)
   
     } catch (error) {
       console.error('APIリクエストエラー:', error);
