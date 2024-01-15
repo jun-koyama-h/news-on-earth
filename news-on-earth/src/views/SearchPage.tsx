@@ -112,23 +112,25 @@ const SearchPage: React.FC = () => {
     };
   }
 
+  let translatedArticles: Article[] = [];
+
   //翻訳・NewsAPI
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
 
     //TODO:仮表示のため、削除
-    const hardcodedArticles: Article[] = [
-      {
-        headline: '固定記事の見出し1',
-        content: '固定記事の内容1...',
-        source: 'bbc(ex)',
-      },
-      {
-        headline: '固定記事の見出し2',
-        content: '固定記事の内容2...',
-        source: 'cnn(ex)',
-      },
-    ];
+    // const hardcodedArticles: Article[] = [
+    //   {
+    //     headline: '固定記事の見出し1',
+    //     content: '固定記事の内容1...',
+    //     source: 'bbc(ex)',
+    //   },
+    //   {
+    //     headline: '固定記事の見出し2',
+    //     content: '固定記事の内容2...',
+    //     source: 'cnn(ex)',
+    //   },
+    // ];
     //TODO:仮表示のため、削除
     
     try {
@@ -170,14 +172,17 @@ const SearchPage: React.FC = () => {
         source: article.source.name
       }));
       console.log('Article型の配列に格納',articles);
+
+      //翻訳API：記事の翻訳
+      translatedArticles = await Promise.all(articles.map(translateArticle));
   
     } catch (error) {
       console.error('APIリクエストエラー:', error);
     }
     navigate('/SearchResult', { 
       state: { 
-        keyword: searchTerm, // searchTerm または 'サンプル検索キーワード' を渡す
-        articles: hardcodedArticles // 検索結果の固定記事を渡す
+        keyword: searchTerm,
+        articles: translatedArticles
       } 
     });
   };
