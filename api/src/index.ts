@@ -92,7 +92,7 @@ app.post('/api/news/', async (c) => {
             q: requestJson.q,
             from: fromDate,
             domains: 'bbc.co.uk,cnn.com,indiatimes.com',
-            sortBy: 'publishedAt',
+            sortBy: 'relevancy',
             apiKey: c.env.NEWS_API_KEY,
         };
 
