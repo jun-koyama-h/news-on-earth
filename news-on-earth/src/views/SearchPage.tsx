@@ -93,7 +93,7 @@ const SearchPage: React.FC = () => {
 
   // 単一の記事を日本語に翻訳する関数
   async function translateArticle(article: Article): Promise<Article> {
-    const response = await fetch('https://api.news-on-earth.workers.dev/api/translate/', {
+    const response = await fetch('https://api.news-on-earth.workers.dev/api/translatetojpn/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
