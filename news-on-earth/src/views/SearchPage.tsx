@@ -91,6 +91,27 @@ const SearchPage: React.FC = () => {
     handleSearch(suggestion); // 検索処理を実行
   };
 
+  // 単一の記事を日本語に翻訳する関数
+  async function translateArticle(article: Article): Promise<Article> {
+    const response = await fetch('https://api.news-on-earth.workers.dev/api/translate/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ translateText: article.content })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result: TranslationResponse = await response.json();
+    return {
+      ...article,
+      content: result.translated_text
+    };
+  }
+
   //翻訳・NewsAPI
   const handleSearch = async (searchTerm: string) => {
     console.log('検索語:', searchTerm);
