@@ -17,10 +17,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, se
 
 	const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const newSearchTerm = e.target.value;
+		console.log("input : " + newSearchTerm);
 		setLocalSearchTerm(newSearchTerm); // 内部状態を更新
-
-		onInputChange(newSearchTerm); // 入力変更時に onInputChange 関数を呼び出す
-		};
+		if (newSearchTerm.endsWith(' ')) {
+			onInputChange(newSearchTerm); // 入力変更時に onInputChange 関数を呼び出す
+		}
+	};
 
 	const handleButtonClick = () => {
 		onSearchChange(localSearchTerm); // ボタンクリック時に検索処理を実行
