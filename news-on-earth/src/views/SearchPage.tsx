@@ -173,7 +173,7 @@ const SearchPage: React.FC = () => {
       }));
       console.log('Article型の配列に格納',articles);
 
-      //翻訳API：記事の翻訳
+      //翻訳API：記事の英→日翻訳
       translatedArticles = await Promise.all(articles.map(translateArticle));
   
     } catch (error) {
