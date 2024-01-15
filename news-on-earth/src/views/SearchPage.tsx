@@ -142,6 +142,13 @@ const SearchPage: React.FC = () => {
 
       const newsResult: NewsApiResponse = await newsResponse.json();
       console.log('取得記事:', newsResult.articles);
+
+      const rawArticles: Article[] = newsResult.articles.map(article => ({
+        headline: article.title,
+        content: article.content,
+        source: article.source.name
+      }));
+      console.log('Article型の配列に格納',rawArticles);
   
     } catch (error) {
       console.error('APIリクエストエラー:', error);
