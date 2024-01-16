@@ -1,0 +1,24 @@
+name = "api"
+compatibility_date = "2023-01-01"
+
+[ai]
+binding = "AI"
+
+# [vars]
+# MY_VARIABLE = "production_value"
+
+[[kv_namespaces]]
+binding = "NEWS_ON_EARTH"
+id = "b3f81eb696a44abdb3db05396d9d9ef4"
+#kv_namespaces = [
+#    { binding = "NEWS_ON_EARTH", id = "b3f81eb696a44abdb3db05396d9d9ef4" }
+#]
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""

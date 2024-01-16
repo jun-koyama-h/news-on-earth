@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fcece4; /* 明るい背景色 */
+    width: 100vw;
+    height: 100vh;
+}
+
+.suggestionsList {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestionsList li {
+    padding: 10px;
+    cursor: pointer;
+}
+  
+.suggestionsList li:hover {
+    background-color: #f0f0f0;
+}
