@@ -16,14 +16,12 @@ id = "b3f81eb696a44abdb3db05396d9d9ef4"
 
 # 開発環境の設定
 [env.dev]
-account_id = "fe0e2e0a728e9d93d702cd8e1f253f2a"  # 開発環境用のアカウントID
 [[env.dev.kv_namespaces]]
 binding = "NEWS_ON_EARTH"
 id = "b3f81eb696a44abdb3db05396d9d9ef4" # 開発環境用のKV ID
 
 # 本番環境の設定
 [env.prod]
-account_id = "6299d8b48d06d8d4c15d981093507f68"  # 本番環境用のアカウントID
 [[env.prod.kv_namespaces]]
 binding = "NEWS_ON_EARTH"
 id = "ffa9c1df40f3496bb2892b75cb0d75b6" # 本番環境用のKV ID
