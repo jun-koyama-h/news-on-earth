@@ -28,7 +28,7 @@ type KVApiResponse = KVApiResponseItem[];
 const SearchResult: React.FC = () => {
   const location = useLocation();
   const [openArticleIndex, setOpenArticleIndex] = useState<number | null>(null);
-  const [mapLocation, setMapLocation] = useState(null); // ピンの初期状態を null に設定
+  const [mapLocation, setMapLocation] = useState<{ lat: number; lng: number }>({ lat: 35.6894, lng: 139.6917 });
 
   // location.state に基づいて型付けされた変数を作成
   const state = location.state as { keyword?: string; articles?: Article[] } | null;
