@@ -4,6 +4,16 @@ compatibility_date = "2023-01-01"
 [ai]
 binding = "AI"
 
+[env.development]
+# 開発環境の設定
+name = "A23z1jk@aiit.ac.jp's Account"
+account_id = "fe0e2e0a728e9d93d702cd8e1f253f2a"
+
+[env.production]
+# 本番環境の設定
+name = "M.s.1123.aqui@gmail.com's Account"
+account_id = "6299d8b48d06d8d4c15d981093507f68"
+
 # [vars]
 # MY_VARIABLE = "production_value"
 
