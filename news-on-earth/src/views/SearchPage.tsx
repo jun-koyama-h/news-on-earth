@@ -38,53 +38,41 @@ interface Article {
 const SearchPage: React.FC = () => {
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [debounceTimer, setDebounceTimer] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>(''); // 検索ボックスの値を保持するステート
 
   //サジェストAPI
   const handleSearchChange = async (searchTerm: string) => {
-    // 既存のタイマーをクリア
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
-    }
-
-    // 新しいタイマーを設定
-    const newTimer = setTimeout(async () => {
-      try {
-        const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ keyword: searchTerm })
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        const result: SuggestApiResponse = await response.json();
+    try {
+      const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ keyword: searchTerm })
+      });
   
-        // 正規表現を使用して必要なテキストを抽出
-        const regex = /\n\d\.\s([^\s]+)\s\(/g;
-  
-        const suggestionsText = [];
-        let match;
-        while ((match = regex.exec(result.response)) !== null) {
-          suggestionsText.push(match[1]);
-        }
-    
-        console.log('生成AIの結果:', suggestionsText);
-        setSuggestions(suggestionsText);
-    
-      } catch (error) {
-        console.error('APIリクエストエラー:', error);
-        setSuggestions([]);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    }, 500); // 500ミリ秒の遅延
+  
+      const result: SuggestApiResponse = await response.json();
 
-    setDebounceTimer(newTimer);
+      // 正規表現を使用して必要なテキストを抽出
+      const regex = /\n\d\.\s([^\s]+)\s\(/g;
 
+      const suggestionsText = [];
+      let match;
+      while ((match = regex.exec(result.response)) !== null) {
+        suggestionsText.push(match[1]);
+      }
+  
+      console.log('生成AIの結果:', suggestionsText);
+      setSuggestions(suggestionsText);
+  
+    } catch (error) {
+      console.error('APIリクエストエラー:', error);
+      setSuggestions([]);
+    }
   };
 
   // サジェストリストの項目がクリックされたときに呼び出される関数
