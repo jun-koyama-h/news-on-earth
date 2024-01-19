@@ -17,7 +17,7 @@ jobs:
         yarn install
         yarn build
 
-  - name: Run Tests
+    - name: Run Tests
       run: |
         cd news-on-earth
         yarn test
