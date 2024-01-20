@@ -7,9 +7,25 @@ binding = "AI"
 # [vars]
 # MY_VARIABLE = "production_value"
 
+[env.development]
+vars = { ENVIRONMENT = "development" }
+zone = "news-on-earth.workers.dev/*"
 [[kv_namespaces]]
 binding = "NEWS_ON_EARTH"
 id = "b3f81eb696a44abdb3db05396d9d9ef4"
+
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+zone = "m-s-1123-aqui.workers.dev/*"
+[[kv_namespaces]]
+binding = "NEWS_ON_EARTH"
+id = "ffa9c1df40f3496bb2892b75cb0d75b6"
+
+
+#[[kv_namespaces]]
+#binding = "NEWS_ON_EARTH"
+#id = "b3f81eb696a44abdb3db05396d9d9ef4"
 #kv_namespaces = [
 #    { binding = "NEWS_ON_EARTH", id = "b3f81eb696a44abdb3db05396d9d9ef4" }
 #]

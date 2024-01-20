@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
+import Modal from 'react-modal';
 
 //型定義
 interface SuggestApiResponse {
@@ -37,54 +38,47 @@ interface Article {
 
 const SearchPage: React.FC = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingMessage, setLoadingMessage] = useState<string>(''); // 検索中メッセージを保持するステート
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [debounceTimer, setDebounceTimer] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>(''); // 検索ボックスの値を保持するステート
 
   //サジェストAPI
   const handleSearchChange = async (searchTerm: string) => {
-    // 既存のタイマーをクリア
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
-    }
-
-    // 新しいタイマーを設定
-    const newTimer = setTimeout(async () => {
-      try {
-        const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ keyword: searchTerm })
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        const result: SuggestApiResponse = await response.json();
-  
-        // 正規表現を使用して必要なテキストを抽出
-        const regex = /\n\d\.\s([^\s]+)\s\(/g;
-  
-        const suggestionsText = [];
-        let match;
-        while ((match = regex.exec(result.response)) !== null) {
-          suggestionsText.push(match[1]);
-        }
-    
-        console.log('生成AIの結果:', suggestionsText);
-        setSuggestions(suggestionsText);
-    
-      } catch (error) {
-        console.error('APIリクエストエラー:', error);
-        setSuggestions([]);
+    try {
+      if (searchTerm === '') {
+        return;
       }
-    }, 500); // 500ミリ秒の遅延
+      const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ keyword: searchTerm })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const result: SuggestApiResponse = await response.json();
 
-    setDebounceTimer(newTimer);
+      // 正規表現を使用して必要なテキストを抽出
+      const regex = /\n\d\.\s([^\s]+)\s\(/g;
 
+      const suggestionsText = [];
+      let match;
+      while ((match = regex.exec(result.response)) !== null) {
+        suggestionsText.push(match[1]);
+      }
+  
+      console.log('生成AIの結果:', suggestionsText);
+      setSuggestions(suggestionsText);
+  
+    } catch (error) {
+      console.error('APIリクエストエラー:', error);
+      setSuggestions([]);
+    }
   };
 
   // サジェストリストの項目がクリックされたときに呼び出される関数
@@ -125,6 +119,8 @@ const SearchPage: React.FC = () => {
     console.log('検索語:', searchTerm);
     
     try {
+      setLoading(true);
+      setLoadingMessage('翻訳中...');
       //翻訳API：キーワードの日→英翻訳
       const translateResponse = await fetch('https://api.news-on-earth.workers.dev/api/translate/', {
         method: 'POST',
@@ -142,6 +138,7 @@ const SearchPage: React.FC = () => {
       console.log('翻訳結果:', translateResult.translated_text);
       
       //NewsAPI：記事の取得
+      setLoadingMessage('記事取得中...');
       const newsResponse = await fetch('https://api.news-on-earth.workers.dev/api/news/', {
         method: 'POST',
         headers: {
@@ -165,11 +162,14 @@ const SearchPage: React.FC = () => {
       console.log('Article型の配列に格納',articles);
 
       //翻訳API：記事の英→日翻訳
+      setLoadingMessage('記事翻訳中...');
       translatedArticles = await Promise.all(articles.map(translateArticle));
       console.log('翻訳記事', translatedArticles)
   
     } catch (error) {
       console.error('APIリクエストエラー:', error);
+    } finally {
+      setLoading(false);
     }
     navigate('/SearchResult', { 
       state: { 
@@ -179,9 +179,31 @@ const SearchPage: React.FC = () => {
     });
   };
 
-
   return (
     <div className={styles.container}>
+      <Modal
+        isOpen={loading}
+        ariaHideApp={false}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            color: 'rgba(0, 0, 0)',
+            zIndex: '9999',
+          },
+          content: {
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '200px',
+            height: '100px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        }}
+      >
+          {loading ? loadingMessage : ''}
+      </Modal>
       <Logo />
       <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} searchTerm={searchTerm} />
       {suggestions.length > 0 && (
