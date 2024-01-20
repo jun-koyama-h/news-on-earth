@@ -7,9 +7,16 @@ binding = "AI"
 # [vars]
 # MY_VARIABLE = "production_value"
 
-[[kv_namespaces]]
-binding = "NEWS_ON_EARTH"
-id = "b3f81eb696a44abdb3db05396d9d9ef4"
+[env.development]
+vars = { ENVIRONMENT = "development" }
+route = "api.news-on-earth.workers.dev/*"
+kv_namespaces = [
+    { binding = "NEWS_ON_EARTH", id = "b3f81eb696a44abdb3db05396d9d9ef4" }
+]
+
+#[[kv_namespaces]]
+#binding = "NEWS_ON_EARTH"
+#id = "b3f81eb696a44abdb3db05396d9d9ef4"
 #kv_namespaces = [
 #    { binding = "NEWS_ON_EARTH", id = "b3f81eb696a44abdb3db05396d9d9ef4" }
 #]
