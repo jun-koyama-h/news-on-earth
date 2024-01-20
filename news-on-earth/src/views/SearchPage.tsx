@@ -46,6 +46,9 @@ const SearchPage: React.FC = () => {
   //サジェストAPI
   const handleSearchChange = async (searchTerm: string) => {
     try {
+      if (searchTerm === '') {
+        return;
+      }
       const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
         method: 'POST',
         headers: {
