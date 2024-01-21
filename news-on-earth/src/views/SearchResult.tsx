@@ -7,6 +7,7 @@ type Article = {
   headline: string;
   content: string;
   source: string;
+  urlToImage: string;
 };
 
 // `value`フィールドのための型
@@ -102,6 +103,7 @@ const SearchResult: React.FC = () => {
               {openArticleIndex === index && (
                 <div className={styles.cardContent}>
                   <p className={styles.content}>{article.content}</p>
+                  <img src={article.urlToImage} />
                 </div>
               )}
             </div>
