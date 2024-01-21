@@ -31,15 +31,11 @@ app.post('/api/translate/', async (c) => {
         }
 
         const ai = new Ai(c.env.AI);
-
-        const translateText = requestJson.translateText
-        const sourceLang = requestJson.sourceLang;
-        const targetLang = requestJson.targetLang;
-
+        
         const result = await ai.run('@cf/meta/m2m100-1.2b', {
-            text: translateText,
-            source_lang: sourceLang,
-            target_lang: targetLang
+            text: requestJson.translateText,
+            source_lang: requestJson.sourceLang,
+            target_lang: requestJson.targetLang,
         });
 
         console.log(JSON.stringify(result));

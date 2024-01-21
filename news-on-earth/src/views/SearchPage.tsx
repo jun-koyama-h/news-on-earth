@@ -88,10 +88,14 @@ const SearchPage: React.FC = () => {
 
   // 単一の記事を日本語に翻訳する関数
   async function translateArticle(article: Article): Promise<Article> {
+    const translateTest = `${article.headline} ${article.content}`;
     const response = await fetch(API_TRANSLATE, {
       method: 'POST',
       headers: API_HEADERS,
-      body: JSON.stringify({ translateText: article.headline + " " + article.content })
+      // body: JSON.stringify({ translateText: 'article.headline + " " + article.content'
+      body: JSON.stringify({ translateText: translateTest
+      , sourceLang: 'english'
+      , targetLang: 'japanese' })
     });
 
     if (!response.ok) {
@@ -122,7 +126,9 @@ const SearchPage: React.FC = () => {
       const translateResponse = await fetch(API_TRANSLATE, {
         method: 'POST',
         headers: API_HEADERS,
-        body: JSON.stringify({ translateText: searchTerm, sourceLang: 'japanese', targetLang: 'english' })
+        body: JSON.stringify({ translateText: searchTerm
+          , sourceLang: 'japanese'
+          , targetLang: 'english' })
       });
 
       if (!translateResponse.ok) {
@@ -137,7 +143,7 @@ const SearchPage: React.FC = () => {
       const newsResponse = await fetch(API_NEWS, {
         method: 'POST',
         headers: API_HEADERS,
-        body: JSON.stringify({ translateText: translateResult.translated_text, sourceLang: 'english', targetLang: 'japanese' })
+        body: JSON.stringify({ q: translateResult.translated_text})
       });
 
       if (!newsResponse.ok) {
