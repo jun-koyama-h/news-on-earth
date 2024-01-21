@@ -29,7 +29,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, se
 
   const handleClearButtonClick = () => {
     setLocalSearchTerm('');
-    onInputChange('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearchChange(localSearchTerm);
+    }
   };
 
   return (
@@ -39,6 +44,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearchChange, onInputChange, se
         placeholder="日本語でキーワードを入力"
         value={localSearchTerm}
         onChange={handleSearchChange}
+        onKeyDown={handleKeyDown}
         style={{
           fontSize: '20px',
           padding: '10px',
