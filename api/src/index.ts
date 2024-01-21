@@ -31,6 +31,30 @@ app.post('/api/translate/', async (c) => {
         }
 
         const ai = new Ai(c.env.AI);
+
+        const result = await ai.run('@cf/meta/m2m100-1.2b', {
+            text: requestJson.translateText,
+            source_lang: requestJson.sourceLang,
+            target_lang: requestJson.targetLang,
+        });
+
+        console.log(JSON.stringify(result));
+
+        return c.text(JSON.stringify(result));
+    } catch (error) {
+        console.log(error);
+        return c.text('エラー', 500);
+    }
+});
+
+app.post('/api/translate/english', async (c) => {
+    try {
+        const requestJson = await c.req.json();
+        if (!requestJson) {
+            return c.text('必須パラメータが見つかりません', 400);
+        }
+
+        const ai = new Ai(c.env.AI);
         
         const result = await ai.run('@cf/meta/m2m100-1.2b', {
             text: requestJson.translateText,

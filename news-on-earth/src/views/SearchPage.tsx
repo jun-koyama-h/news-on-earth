@@ -4,7 +4,7 @@ import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 import Modal from 'react-modal';
-import { API_TRANSLATE, API_SUGGEST, API_NEWS, API_HEADERS } from '../constraints/constants.ts'
+import { API_TRANSLATE, API_TRANSLATE_ENGLISH, API_SUGGEST, API_NEWS, API_HEADERS } from '../constraints/constants.ts'
 
 //型定義
 interface SuggestApiResponse {
@@ -89,7 +89,7 @@ const SearchPage: React.FC = () => {
   // 単一の記事を日本語に翻訳する関数
   async function translateArticle(article: Article): Promise<Article> {
     const translateTest = `${article.headline} ${article.content}`;
-    const response = await fetch(API_TRANSLATE, {
+    const response = await fetch(API_TRANSLATE_ENGLISH, {
       method: 'POST',
       headers: API_HEADERS,
       // body: JSON.stringify({ translateText: 'article.headline + " " + article.content'
