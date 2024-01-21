@@ -47,7 +47,7 @@ app.post('/api/translate/', async (c) => {
     }
 });
 
-app.post('/api/translate-english/', async (c) => {
+app.post('/api/translateenglish/', async (c) => {
     try {
         const requestJson = await c.req.json();
         if (!requestJson) {
