@@ -144,9 +144,12 @@ const SearchPage: React.FC = () => {
       articleCountPerSource[sourceId] = (articleCountPerSource[sourceId] || 0) + 1;
   
       if (articleCountPerSource[sourceId] <= 3) {
+        // 'The Times of India' の場合、description を content に使用
+        const content = article.source.name === 'The Times of India' ? article.description : article.content;
+  
         filteredArticles.push({
           headline: article.title,
-          content: article.content,
+          content: content, // 修正された content を使用
           source: article.source.name,
           url: article.url,
           urlToImage: article.urlToImage,
@@ -158,6 +161,7 @@ const SearchPage: React.FC = () => {
   
     return filteredArticles;
   }
+  
 
   //翻訳後の記事を格納する変数を定義
   let translatedArticles: Article[] = [];
