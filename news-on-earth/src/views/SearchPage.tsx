@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 import Modal from 'react-modal';
+import { API_TRANSLATE, API_TRANSLATE_ENGLISH, API_NEWS, API_SUGGEST, API_HEADERS } from '../constraints/constants.ts'
 
 //型定義
 interface SuggestApiResponse {
@@ -50,11 +51,9 @@ const SearchPage: React.FC = () => {
       if (searchTerm === '') {
         return;
       }
-      const response = await fetch('https://api.news-on-earth.workers.dev/api/suggest/', {
+      const response = await fetch(API_SUGGEST, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: API_HEADERS,
         body: JSON.stringify({ keyword: searchTerm })
       });
   
@@ -90,11 +89,9 @@ const SearchPage: React.FC = () => {
 
   // 単一の記事を日本語に翻訳する関数
   async function translateArticle(article: Article): Promise<Article> {
-    const response = await fetch('https://api.news-on-earth.workers.dev/api/translatetojpn/', {
+    const response = await fetch(API_TRANSLATE_ENGLISH, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: API_HEADERS,
       body: JSON.stringify({ translateText: article.headline + " " + article.content })
     });
 
@@ -124,11 +121,9 @@ const SearchPage: React.FC = () => {
       setLoading(true);
       setLoadingMessage('翻訳中...');
       //翻訳API：キーワードの日→英翻訳
-      const translateResponse = await fetch('https://api.news-on-earth.workers.dev/api/translate/', {
+      const translateResponse = await fetch(API_TRANSLATE, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: API_HEADERS,
         body: JSON.stringify({ translateText: searchTerm })
       });
 
@@ -141,11 +136,9 @@ const SearchPage: React.FC = () => {
       
       //NewsAPI：記事の取得
       setLoadingMessage('記事取得中...');
-      const newsResponse = await fetch('https://api.news-on-earth.workers.dev/api/news/', {
+      const newsResponse = await fetch(API_NEWS, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: API_HEADERS,
         body: JSON.stringify({ q: translateResult.translated_text })
       });
 
