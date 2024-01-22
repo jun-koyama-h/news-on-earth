@@ -114,6 +114,34 @@ const SearchPage: React.FC = () => {
     };
   }
 
+  //ソース毎に記事をフィルタリング & Article型の配列に格納する関数を定義
+  function filterArticles(articles: NewsApiResponse['articles']): Article[] {
+    const articleCountPerSource: Record<string, number> = {};
+    const filteredArticles: Article[] = [];
+    let totalArticles = 0;
+  
+    for (const article of articles) {
+      if (totalArticles >= 10) break;
+  
+      const sourceId = article.source.id;
+      articleCountPerSource[sourceId] = (articleCountPerSource[sourceId] || 0) + 1;
+  
+      if (articleCountPerSource[sourceId] <= 3) {
+        filteredArticles.push({
+          headline: article.title,
+          content: article.content,
+          source: article.source.name,
+          url: article.url,
+          urlToImage: article.urlToImage,
+          publishedAt: article.publishedAt
+        });
+        totalArticles++;
+      }
+    }
+  
+    return filteredArticles;
+  }
+
   //翻訳後の記事を格納する変数を定義
   let translatedArticles: Article[] = [];
 
@@ -153,15 +181,8 @@ const SearchPage: React.FC = () => {
       const newsResult: NewsApiResponse = await newsResponse.json();
       console.log('取得記事:', newsResult.articles);
 
-      const articles: Article[] = newsResult.articles.slice(0, 10).map(article => ({
-        headline: article.title,
-        content: article.content,
-        source: article.source.name,
-        url: article.url,
-        urlToImage: article.urlToImage,
-        publishedAt: article.publishedAt
-      }));
-      console.log('Article型の配列に格納',articles);
+      const articles = filterArticles(newsResult.articles);
+      console.log('フィルター・型変更済み記事', articles);
 
       //翻訳API：記事の英→日翻訳
       setLoadingMessage('記事翻訳中...');
