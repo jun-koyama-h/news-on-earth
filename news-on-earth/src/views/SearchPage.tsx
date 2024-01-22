@@ -36,6 +36,7 @@ interface Article {
   source: string;
   url: string;
   urlToImage: string;
+  publishedAt: string;
 }
 //型定義ここまで
 
@@ -108,7 +109,8 @@ const SearchPage: React.FC = () => {
       content: translatedContent.join(" "),
       source: article.source,
       url: article.url,
-      urlToImage: article.urlToImage
+      urlToImage: article.urlToImage,
+      publishedAt: article.publishedAt
     };
   }
 
@@ -156,7 +158,8 @@ const SearchPage: React.FC = () => {
         content: article.content,
         source: article.source.name,
         url: article.url,
-        urlToImage: article.urlToImage
+        urlToImage: article.urlToImage,
+        publishedAt: article.publishedAt
       }));
       console.log('Article型の配列に格納',articles);
 
