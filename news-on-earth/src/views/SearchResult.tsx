@@ -9,6 +9,7 @@ type Article = {
   source: string;
   url: string;
   urlToImage: string;
+  publishedAt: string;
 };
 
 // `value`フィールドのための型
@@ -37,6 +38,13 @@ const SearchResult: React.FC = () => {
   const keyword = state?.keyword ?? 'デフォルトキーワード';
   const articles = state?.articles ?? [];
 
+  const formatter = new Intl.DateTimeFormat('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
   const toggleArticle = (index: number) => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
   };
@@ -90,7 +98,8 @@ const SearchResult: React.FC = () => {
           {articles.map((article, index) => (
             <div key={index} className={styles.article}>
               <div onClick={() => toggleArticle(index)} className={styles.cardHeader}>
-                <h3 className={styles.headline}>{article.headline}</h3>
+                <h3 className={styles.publishedAt}>{}</h3>
+                <h3 className={styles.headline}>{formatter.format(new Date(article.publishedAt)).concat(' ').concat(article.headline)}</h3>
                 <span
                   className={styles.source}
                   onClick={() => handleSourceClick(article.source)}
