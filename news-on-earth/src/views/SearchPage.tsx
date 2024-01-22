@@ -34,6 +34,7 @@ interface Article {
   headline: string;
   content: string;
   source: string;
+  url: string;
   urlToImage: string;
 }
 //型定義ここまで
@@ -106,6 +107,7 @@ const SearchPage: React.FC = () => {
       headline: translatedHeadline,
       content: translatedContent.join(" "),
       source: article.source,
+      url: article.url,
       urlToImage: article.urlToImage
     };
   }
@@ -149,10 +151,11 @@ const SearchPage: React.FC = () => {
       const newsResult: NewsApiResponse = await newsResponse.json();
       console.log('取得記事:', newsResult.articles);
 
-      const articles: Article[] = newsResult.articles.slice(0, 3).map(article => ({
+      const articles: Article[] = newsResult.articles.slice(0, 10).map(article => ({
         headline: article.title,
         content: article.content,
         source: article.source.name,
+        url: article.url,
         urlToImage: article.urlToImage
       }));
       console.log('Article型の配列に格納',articles);
