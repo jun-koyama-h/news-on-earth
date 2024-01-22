@@ -45,6 +45,7 @@ const SearchResult: React.FC = () => {
     hour: '2-digit',
     minute: '2-digit',
   });
+
   const toggleArticle = (index: number) => {
     setOpenArticleIndex(openArticleIndex === index ? null : index);
   };
@@ -94,6 +95,7 @@ const SearchResult: React.FC = () => {
         <div className={styles.keyword}>
           <h2>{keyword}</h2>
         </div>
+        {articles.length == 0 ? <div className={styles.errorMessage}><h2>該当検索記事はありません。</h2></div> : ''}
         <div className={styles.articles}>
           {articles.map((article, index) => (
             <div key={index} className={styles.article}>
