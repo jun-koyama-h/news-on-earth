@@ -7,6 +7,7 @@ type Article = {
   headline: string;
   content: string;
   source: string;
+  url: string;
   urlToImage: string;
 };
 
@@ -103,7 +104,7 @@ const SearchResult: React.FC = () => {
               {openArticleIndex === index && (
                 <div className={styles.cardContent}>
                   <p className={styles.content}>{article.content}</p>
-                  <img src={article.urlToImage} />
+                  <a href={article.url} target="_blank"><img src={article.urlToImage} /></a>
                 </div>
               )}
             </div>
