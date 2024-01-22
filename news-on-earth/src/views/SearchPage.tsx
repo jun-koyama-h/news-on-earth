@@ -91,28 +91,45 @@ const SearchPage: React.FC = () => {
 
   // 単一の記事を日本語に翻訳する関数
   async function translateArticle(article: Article): Promise<Article> {
-    const response = await fetch(API_TRANSLATE_ENGLISH, {
+    // ヘッドラインの翻訳
+    const headlineResponse = await fetch(API_TRANSLATE_ENGLISH, {
       method: 'POST',
       headers: API_HEADERS,
-      body: JSON.stringify({ translateText: article.headline + " " + article.content })
+      body: JSON.stringify({ translateText: article.headline })
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  
+    if (!headlineResponse.ok) {
+      throw new Error(`HTTP error! status: ${headlineResponse.status}`);
     }
-
-    const result: TranslationResponse = await response.json();
-    const [translatedHeadline, ...translatedContent] = result.translated_text.split(" ");
-
+  
+    const headlineResult: TranslationResponse = await headlineResponse.json();
+    const translatedHeadline = headlineResult.translated_text;
+  
+    // 内容の翻訳
+    const contentResponse = await fetch(API_TRANSLATE_ENGLISH, {
+      method: 'POST',
+      headers: API_HEADERS,
+      body: JSON.stringify({ translateText: article.content })
+    });
+  
+    if (!contentResponse.ok) {
+      throw new Error(`HTTP error! status: ${contentResponse.status}`);
+    }
+  
+    const contentResult: TranslationResponse = await contentResponse.json();
+    const translatedContent = contentResult.translated_text;
+  
+    // 結合した翻訳結果を返す
     return {
       headline: translatedHeadline,
-      content: translatedContent.join(" "),
+      content: translatedContent,
       source: article.source,
       url: article.url,
       urlToImage: article.urlToImage,
       publishedAt: article.publishedAt
     };
   }
+  
 
   //ソース毎に記事をフィルタリング & Article型の配列に格納する関数を定義
   function filterArticles(articles: NewsApiResponse['articles']): Article[] {
