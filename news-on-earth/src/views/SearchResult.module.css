@@ -35,6 +35,12 @@
     color: #333333; /* キーワードの色を濃い色に設定 */
 }
 
+.errorMessage {
+    margin-bottom: 20px;
+    font-size: 1.0rem; /* キーワードのフォントサイズを大きく設定 */
+    color: #bb1717; /* キーワードの色を濃い色に設定 */
+}
+
 .cardHeader {
     display: flex;
     align-items: center;
