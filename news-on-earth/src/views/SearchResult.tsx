@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom'; // useLocation をインポート
 import styles from './SearchResult.module.css';
 import Map from './Map'; // Map コンポーネントをインポート
+import Logo from './Logo';
 
 type Article = {
   headline: string;
@@ -92,6 +93,7 @@ const SearchResult: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.leftPanel}>
+      <Logo width={135} height={54} />
         <div className={styles.keyword}>
           <h2>{keyword}</h2>
         </div>
