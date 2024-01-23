@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
 import LoadingModal from './LoadingModal.tsx';
+import SuggestionList from './SuggestionList.tsx';
 import { API_TRANSLATE, API_TRANSLATE_ENGLISH, API_NEWS, API_SUGGEST, API_HEADERS } from '../constraints/constants.ts'
 
 //型定義
@@ -228,15 +229,7 @@ const SearchPage: React.FC = () => {
       <LoadingModal loading={loading} message={loadingMessage} />
       <Logo width={500} height={200} />
       <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} searchTerm={searchTerm} />
-      {suggestions.length > 0 && (
-        <ul className={styles.suggestionsList}>
-          {suggestions.map((suggestion, index) => (
-            <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
+      <SuggestionList suggestions={suggestions} handleSuggestionClick={handleSuggestionClick} />
     </div> 
   );
 };
