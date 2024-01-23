@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBox from './SearchBox';
 import styles from './SearchPage.module.css';
 import Logo from './Logo';
-import Modal from 'react-modal';
+import LoadingModal from './LoadingModal.tsx';
 import { API_TRANSLATE, API_TRANSLATE_ENGLISH, API_NEWS, API_SUGGEST, API_HEADERS } from '../constraints/constants.ts'
 
 //型定義
@@ -225,29 +225,7 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Modal
-        isOpen={loading}
-        ariaHideApp={false}
-        style={{
-          overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            color: 'rgba(0, 0, 0)',
-            zIndex: '9999',
-          },
-          content: {
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '200px',
-            height: '100px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          },
-        }}
-      >
-          {loading ? loadingMessage : ''}
-      </Modal>
+      <LoadingModal loading={loading} message={loadingMessage} />
       <Logo width={500} height={200} />
       <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} searchTerm={searchTerm} />
       {suggestions.length > 0 && (
