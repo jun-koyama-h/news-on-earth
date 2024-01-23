@@ -86,12 +86,16 @@ app.post('/api/news/', async (c) => {
         const date = new Date();
         date.setDate(date.getDate() - 7);
         const fromDate = date.toISOString().split('T')[0];
+        // メディア情報の取得
+        const keyList = await c.env.NEWS_ON_EARTH.list();
+        const domains = keyList.keys.map(item => item.name).join(',');
 
         const apiUrl = 'https://newsapi.org/v2/everything';
         const params = {
             q: requestJson.q,
             from: fromDate,
-            domains: 'bbc.co.uk,cnn.com,indiatimes.com',
+            domains: domains,
+            // domains: 'bbc.co.uk,cnn.com,indiatimes.com',
             sortBy: 'relevancy',
             apiKey: c.env.NEWS_API_KEY,
         };
