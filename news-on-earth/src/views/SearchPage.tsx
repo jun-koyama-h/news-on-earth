@@ -248,7 +248,7 @@ const SearchPage: React.FC = () => {
       >
           {loading ? loadingMessage : ''}
       </Modal>
-      <Logo />
+      <Logo width={500} height={200} />
       <SearchBox onSearchChange={handleSearch} onInputChange={handleSearchChange} searchTerm={searchTerm} />
       {suggestions.length > 0 && (
         <ul className={styles.suggestionsList}>

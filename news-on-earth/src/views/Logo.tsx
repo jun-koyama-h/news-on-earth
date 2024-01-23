@@ -1,11 +1,13 @@
 import logo from '../assets/logo.svg'; // ロゴファイルをインポート
-
-const Logo = () => {
+interface LogoProps {
+  width: number;
+  height: number;
+}
+const Logo: React.FC<LogoProps> = ({ width, height }) => {
   return (
     <div>
-      <img src={logo} alt="Logo" width="500" height="200"/>
+      <img src={logo} alt="Logo" width={width} height={height}/>
     </div>
   );
 };
-
 export default Logo;
