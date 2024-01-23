@@ -4,8 +4,9 @@
     padding: 20px;
     background-color: #fcece4; /* 明るい背景色 */
     align-items: flex-start;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    overflow: auto;
 }
 
 .leftPanel, .rightPanel {
