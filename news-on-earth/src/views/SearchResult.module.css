@@ -78,6 +78,11 @@
     margin-left: 10px;
     font-style: italic; /* 斜体でスタイリッシュな印象に */
 }
+.publishedAt {
+    font-size: 0.8rem; /* フォントサイズを小さく設定 */
+    color: #9a9a9b; /* グレー */
+    margin-left: 10px;
+}
 
 .icon {
     display: inline-block;

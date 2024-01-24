@@ -102,14 +102,15 @@ const SearchResult: React.FC = () => {
           {articles.map((article, index) => (
             <div key={index} className={styles.article}>
               <div onClick={() => toggleArticle(index)} className={styles.cardHeader}>
-                <h3 className={styles.publishedAt}>{}</h3>
-                <h3 className={styles.headline}>{formatter.format(new Date(article.publishedAt)).concat(' ').concat(article.headline)}</h3>
+                <h3 className={styles.headline}>{article.headline}</h3>
+                <p className={styles.publishedAt}>{(formatter.format(new Date(article.publishedAt)))}</p>
                 <span
                   className={styles.source}
                   onClick={() => handleSourceClick(article.source)}
                 >
                   {article.source}
                 </span>
+                  
                 <span className={styles.icon}>
                   {openArticleIndex === index ? '▲' : '▼'}
                 </span>
