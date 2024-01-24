@@ -34,15 +34,25 @@ app.post('/api/translate/', async (c) => {
 
         const translateText = requestJson.translateText
 
-        const result = await ai.run('@cf/meta/m2m100-1.2b', {
+        const english = await ai.run('@cf/meta/m2m100-1.2b', {
             text: translateText,
             source_lang: "japanese",
             target_lang: "english"
         });
+        const chinese = await ai.run('@cf/meta/m2m100-1.2b', {
+            text: translateText,
+            source_lang: "japanese",
+            target_lang: "chinese"
+        });
+        const combinedResult = [
+            { language: 'english', translatedText: english.translated_text },
+            { language: 'chinese', translatedText: chinese.translated_text }
+        ];
+        console.log(JSON.stringify(combinedResult));
 
-        console.log(JSON.stringify(result));
-
-        return c.text(JSON.stringify(result));
+        
+        return c.text(JSON.stringify(combinedResult));
+        // return c.text(JSON.stringify(result));
     } catch (error) {
         console.log(error);
         return c.text('エラー', 500);
