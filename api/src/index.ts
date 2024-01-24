@@ -34,25 +34,15 @@ app.post('/api/translate/', async (c) => {
 
         const translateText = requestJson.translateText
 
-        const english = await ai.run('@cf/meta/m2m100-1.2b', {
+        const result = await ai.run('@cf/meta/m2m100-1.2b', {
             text: translateText,
             source_lang: "japanese",
             target_lang: "english"
         });
-        const chinese = await ai.run('@cf/meta/m2m100-1.2b', {
-            text: translateText,
-            source_lang: "japanese",
-            target_lang: "chinese"
-        });
-        const combinedResult = [
-            { language: 'english', translatedText: english.translated_text },
-            { language: 'chinese', translatedText: chinese.translated_text }
-        ];
-        console.log(JSON.stringify(combinedResult));
 
-        
-        return c.text(JSON.stringify(combinedResult));
-        // return c.text(JSON.stringify(result));
+        console.log(JSON.stringify(result));
+
+        return c.text(JSON.stringify(result));
     } catch (error) {
         console.log(error);
         return c.text('エラー', 500);
@@ -99,12 +89,10 @@ app.post('/api/news/', async (c) => {
         // メディア情報の取得
         const keyList = await c.env.NEWS_ON_EARTH.list();
         const domains = keyList.keys.map(item => item.name).join(',');
-        const combinedText = requestJson.q.map((t: { translatedText: string; }) => t.translatedText).join(' OR ');
 
         const apiUrl = 'https://newsapi.org/v2/everything';
         const params = {
-            // q: requestJson.q,
-            q: combinedText,
+            q: requestJson.q,
             from: fromDate,
             domains: domains,
             // domains: 'bbc.co.uk,cnn.com,indiatimes.com',
