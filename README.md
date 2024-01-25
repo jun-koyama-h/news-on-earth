@@ -17,12 +17,14 @@
 * サーバー：Cloudflare Pages
 * サーバーレスJavaScript：Cloudflare Workers
 * Web APIライブラリ：Hono
+* テスティングフレームワーク：Jest
 * データベース：Cloudflare Workers KV
 * 翻訳API：Cloudflare Wokers AI
 * サジェストAPI：Cloudflare Wokers AI
 * 地図表示：React leaflet
 * タスク管理：GitHub Projects
 * IDE：GitHub Codespaces
+* ニュース取得先API https://newsapi.org/
 
 ## 使用するメディア
 |国|メディア名|APIが提供されているか|longitude latitude|
