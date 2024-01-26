@@ -118,8 +118,8 @@ const SearchResult: React.FC = () => {
               {openArticleIndex === index && (
                 <div className={styles.cardContent}>
                   <p className={styles.content}>{article.content}</p>
-                  <a href={article.url} target="_blank"><img src={article.urlToImage} /></a>
-                </div>
+                    <a href={article.url} target="_blank" rel="noopener noreferrer"><img src={article.urlToImage} /></a>
+                  </div>
               )}
             </div>
           ))}
