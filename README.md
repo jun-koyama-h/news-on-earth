@@ -41,3 +41,6 @@
 |エジプト|[Al Youm Al Sabea](https://www.youm7.com/home/index)|NG only news.google.com|30.049263425756553, 31.210451457352463|
 |キューバ|[Trabajadores](https://www.trabajadores.cu/)|NG|23.121388185987506, -82.38382042158497|
 |トルコ|[Sözcü](https://www.sozcu.com.tr/)|NG only news.google.com|41.5304375907573, 29.065487235442973|
+
+## 動作環境
+[News on Earth](https://news-on-earth.pages.dev/)
