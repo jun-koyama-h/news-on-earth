@@ -5,6 +5,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "base64-js": "^1.5.1",
     "hono": "^4.2.7",
     "typescript": "^5.3.3"
   },
