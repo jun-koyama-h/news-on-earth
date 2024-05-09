@@ -5,7 +5,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "hono": "^3.11.11",
+    "hono": "^4.2.7",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
